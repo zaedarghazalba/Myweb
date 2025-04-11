@@ -1,4 +1,5 @@
 import '../index.css';
+import { motion } from 'framer-motion';
 import alibabaImg from '../Assets/alibaba.png';
 import javascriptImg from '../Assets/javascript.png';
 import dataengImg from '../Assets/dataeng.png';
@@ -22,12 +23,22 @@ export default function Certifications() {
   return (
     <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen p-6 sm:p-12">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl sm:text-4xl font-bold mb-8">Sertifikasi</h1>
+        <motion.h1
+          className="text-2xl sm:text-4xl font-bold mb-8 text-center"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          Sertifikasi
+        </motion.h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {certs.map((cert, index) => (
-            <div
+            <motion.div
               key={index}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <img
                 src={cert.image}
@@ -37,10 +48,13 @@ export default function Certifications() {
               <div className="p-4">
                 <h2 className="text-lg font-semibold text-center">{cert.name}</h2>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
+      <footer className="fixed bottom-0 left-0 w-full text-center py-2 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 z-50">
+        © {new Date().getFullYear()} Zaedar Ghazalba. All rights reserved.
+      </footer>
     </div>
   );
 }

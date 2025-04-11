@@ -1,98 +1,117 @@
 import '../index.css';
-import { FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin, FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel, FaPython, FaJs, FaReact } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import {
+  FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin,
+  FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel,
+  FaPython, FaJs, FaReact
+} from 'react-icons/fa';
 import { SiKotlin } from 'react-icons/si';
-import profileImg from '../Assets/profile.jpg'; // Pastikan path-nya sesuai
+import profileImg from '../Assets/profile.jpg';
 
 export default function About() {
   return (
-    <div className="relative bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen p-6 sm:p-12 flex items-center justify-center overflow-hidden">
-      
-      {/* Gambar Background Transparan */}
-      <div className="absolute inset-0 z-0 opacity-30">
-        <img
-          src={profileImg}
-          alt="Zaedar Background"
-          className="w-full h-full object-cover"
-        />
+    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+
+      {/* Background */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <img src={profileImg} alt="Background" className="w-full h-full object-cover" />
       </div>
 
-      {/* Konten Utama */}
-      <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        
-        {/* Foto dan Biodata */}
-        <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        
+      {/* Main Content */}
+      <main className="relative z-10 flex-grow flex flex-col items-center justify-start py-12 px-6">
+
+        {/* H1 Intro */}
+        <motion.h1
+          className="text-4xl sm:text-5xl font-bold text-center mb-4"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Hello World, I'm Zaedar Ghazalba
+        </motion.h1>
+
+        {/* Deskripsi singkat */}
+        <motion.p
+          className="text-lg text-center text-gray-700 dark:text-gray-300 mb-10"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Seorang yang antusias di dunia pemrograman dan senang mempelajari hal baru.
+        </motion.p>
+
+        {/* Konten utama */}
+        <div className="w-full max-w-4xl flex flex-col items-center space-y-10">
+
+          {/* Nama */}
+          <motion.h1
+            className="text-4xl sm:text-5xl font-bold text-center"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            Zaedar Ghazalba
+          </motion.h1>
 
           {/* Biodata */}
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-2">Zaedar Ghazalba</h1>
-            <p className="text-gray-500 dark:text-gray-400 text-base mb-4">@zaedarghazalba</p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6 text-justify">
-            Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) karena percaya bahwa kualitas adalah bagian penting dari sebuah produk digital.
+          <motion.div
+            className="text-center max-w-2xl"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <p className="text-gray-400 mb-2">@zaedarghazalba</p>
+            <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+              Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) karena percaya bahwa kualitas adalah bagian penting dari sebuah produk digital.
             </p>
 
-            {/* Social Media Icons */}
-            <div className="flex space-x-6">
-            <a
-                href="https://wa.me/6281250371835"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-green-500 hover:text-green-600 text-2xl transition-transform hover:scale-110"
-            >
+            {/* Sosial Media */}
+            <div className="mt-4 flex justify-center space-x-6 text-2xl">
+              <a href="https://wa.me/6281250371835" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:scale-110 transition-transform">
                 <FaWhatsapp />
-            </a>
-            <a
-                href="https://instagram.com/zeedargh"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-500 hover:text-pink-600 text-2xl transition-transform hover:scale-110"
-            >
+              </a>
+              <a href="https://instagram.com/zeedargh" target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:scale-110 transition-transform">
                 <FaInstagram />
-            </a>
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:text-blue-600 text-2xl hover:scale-110 transition-transform"
-            >
-              <FaEnvelope />
-            </a>
-            <a
-                href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/" // ganti URL ini jika berbeda
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-700 hover:text-blue-800 text-2xl transition-transform hover:scale-110"
-            >
+              </a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:scale-110 transition-transform">
+                <FaEnvelope />
+              </a>
+              <a href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:scale-110 transition-transform">
                 <FaLinkedin />
-            </a>
+              </a>
             </div>
-            </div>
-        </div>
+          </motion.div>
 
-        {/* Card Keahlian */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Keahlian</h2>
+          {/* Keahlian */}
+          <motion.div
+            className="w-full bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.6 }}
+          >
+            <h2 className="text-xl font-semibold mb-4 text-center">Keahlian</h2>
 
-          <div className="space-y-4">
-            {/* Role */}
-            <div className="flex items-center space-x-3">
-              <FaBug className="text-red-500 text-xl" />
-              <span className="font-medium">QA Tester</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <FaMobileAlt className="text-green-500 text-xl" />
-              <span className="font-medium">Mobile Developer</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <FaCode className="text-yellow-500 text-xl" />
-              <span className="font-medium">Web Developer</span>
+            {/* Roles */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-center">
+              <div className="flex items-center justify-center space-x-2">
+                <FaBug className="text-red-500 text-xl" />
+                <span>QA Tester</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <FaMobileAlt className="text-green-500 text-xl" />
+                <span>Mobile Developer</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <FaCode className="text-yellow-500 text-xl" />
+                <span>Web Developer</span>
+              </div>
             </div>
 
-            <hr className="my-4 border-gray-600" />
+            <hr className="mb-4 border-gray-600" />
 
-            {/* Tools & Languages */}
-            <h3 className="text-md font-semibold">Bahasa & Tools:</h3>
-            <div className="grid grid-cols-3 gap-4 text-center text-sm text-gray-700 dark:text-gray-300">
+            {/* Bahasa & Tools */}
+            <h3 className="text-md font-semibold mb-4 text-center">Bahasa & Tools</h3>
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 text-center text-sm text-gray-700 dark:text-gray-300">
               <div className="flex flex-col items-center">
                 <FaPhp className="text-purple-600 text-xl" />
                 <span>PHP</span>
@@ -118,9 +137,14 @@ export default function About() {
                 <span>React JS</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="fixed bottom-0 left-0 w-full text-center py-2 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 z-50">
+        © {new Date().getFullYear()} Zaedar Ghazalba. All rights reserved.
+      </footer>
     </div>
   );
 }
