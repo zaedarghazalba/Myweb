@@ -50,10 +50,12 @@ export default function About() {
                 <FaInstagram />
             </a>
             <a
-                href="mailto:zaedaralba11202@gmail.com"
-                className="text-blue-500 hover:text-blue-600 text-2xl transition-transform hover:scale-110"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-600 text-2xl hover:scale-110 transition-transform"
             >
-                <FaEnvelope />
+              <FaEnvelope />
             </a>
             <a
                 href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/" // ganti URL ini jika berbeda
