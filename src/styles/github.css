@@ -1,0 +1,235 @@
+/* GitHub-inspired custom styles */
+
+/* GitHub-style animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Repository card hover effects */
+.repo-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.repo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* GitHub-style buttons */
+.github-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+.github-btn:hover {
+  transform: scale(1.02);
+}
+
+/* GitHub-style badges */
+.github-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.github-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Stats card animations */
+.stats-card {
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* GitHub contribution graph styles */
+.calendar {
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.dark .calendar {
+  border-color: #30363d;
+}
+
+/* Activity timeline */
+.activity-item {
+  position: relative;
+  padding-left: 24px;
+}
+
+.activity-item::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 32px;
+  bottom: -16px;
+  width: 2px;
+  background: linear-gradient(to bottom, #e1e4e8, transparent);
+}
+
+.dark .activity-item::before {
+  background: linear-gradient(to bottom, #30363d, transparent);
+}
+
+.activity-item:last-child::before {
+  display: none;
+}
+
+/* Language color dots */
+.language-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* GitHub-style link */
+.github-link {
+  color: #0969da;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.github-link:hover {
+  text-decoration: underline;
+  color: #0550ae;
+}
+
+.dark .github-link {
+  color: #58a6ff;
+}
+
+.dark .github-link:hover {
+  color: #79c0ff;
+}
+
+/* Card shadow effects */
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.card-shadow:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+}
+
+/* Responsive grid improvements */
+@media (max-width: 640px) {
+  .repo-card {
+    margin-bottom: 16px;
+  }
+
+  .stats-card {
+    padding: 12px;
+  }
+}
+
+/* GitHub-style focus ring */
+.focus-ring:focus {
+  outline: 2px solid #0969da;
+  outline-offset: 2px;
+}
+
+.dark .focus-ring:focus {
+  outline-color: #58a6ff;
+}
+
+/* Profile avatar styling */
+.profile-avatar {
+  border: 3px solid;
+  border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* GitHub-style code block */
+.code-block {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.dark .code-block {
+  background-color: #161b22;
+}

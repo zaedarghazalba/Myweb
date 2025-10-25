@@ -1,0 +1,347 @@
+.flip-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 0;
+  perspective: 1500px;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 520px;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front and Back common styles */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ======== FRONT SIDE - FULL PHOTO ======== */
+.flip-card-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.full-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 1;
+}
+
+.front-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  z-index: 2;
+}
+
+.name-container {
+  margin-bottom: 1.5rem;
+}
+
+.profile-name {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+}
+
+.profile-username {
+  font-size: 1.15rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.click-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  animation: pulse-hint 2s ease-in-out infinite;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.25rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.click-hint svg {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes pulse-hint {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* ======== BACK SIDE ======== */
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: rotateY(180deg);
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.back-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  overflow: hidden;
+}
+
+.back-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.back-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.decorative-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.decorative-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.bio-container {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.bio-text {
+  width: 100%;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.98);
+  text-align: justify;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 1.15rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom scrollbar for bio */
+.bio-text::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bio-text::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.bio-text::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  transition: background 0.3s;
+}
+
+.bio-text::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.back-footer {
+  text-align: center;
+  margin: 0.75rem 0;
+  flex-shrink: 0;
+}
+
+.role-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 0.4rem 0.85rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-hint {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .flip-card {
+    max-width: 360px;
+    height: 500px;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .profile-username {
+    font-size: 1.05rem;
+  }
+
+  .back-title {
+    font-size: 1.3rem;
+  }
+
+  .bio-text {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    padding: 1rem;
+  }
+
+  .flip-card-inner {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .flip-card {
+    max-width: 320px;
+    height: 480px;
+  }
+
+  .front-content {
+    padding: 1.5rem;
+  }
+
+  .flip-card-inner {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .profile-name {
+    font-size: 1.6rem;
+  }
+
+  .profile-username {
+    font-size: 0.95rem;
+  }
+
+  .name-container {
+    margin-bottom: 0.75rem;
+  }
+
+  .click-hint {
+    font-size: 0.72rem;
+    padding: 0.5rem 0.85rem;
+  }
+
+  .back-title {
+    font-size: 1.2rem;
+  }
+
+  .back-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .bio-text {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    padding: 0.95rem;
+  }
+
+  .role-badge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.75rem;
+  }
+}
+
+/* Hover effect on desktop */
+@media (hover: hover) {
+  .flip-card:hover {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+  }
+
+  .flip-card:hover .photo-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+  }
+}

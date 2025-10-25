@@ -16,8 +16,8 @@ export default function NavbarSidebar({ isOpen, onClose }) {
       <aside
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed z-50 md:translate-x-0 md:static transition-transform duration-300 
-           w-60 min-h-screen bg-gray-900 text-white p-4 shadow-lg`}
+        } fixed z-50 md:translate-x-0 md:sticky md:top-0 transition-transform duration-300
+           w-60 h-screen bg-gray-900 text-white p-4 shadow-lg overflow-y-auto`}
       >
         {/* Tombol close di mobile */}
         <div className="flex items-center justify-between md:hidden mb-6">

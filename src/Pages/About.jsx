@@ -1,21 +1,22 @@
 import '../index.css';
 import { motion } from 'framer-motion';
 import {
-  FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin,
+  FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin, FaGithub,
   FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel,
   FaPython, FaJs, FaReact
 } from 'react-icons/fa';
 import { SiKotlin } from 'react-icons/si';
 import profileImg from '../Assets/profile.jpg';
-
+import GitHubStats from '../Components/GitHubStats';
+import GitHubContributions from '../Components/GitHubContributions';
+import GitHubActivity from '../Components/GitHubActivity';
+import TechStackInteractive from '../Components/TechStackInteractive';
+import GitHubBadges from '../Components/GitHubBadges';
+import PinnedRepos from '../Components/PinnedRepos';
+import ProfileCard from '../Components/ProfileCard';
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-
-      {/* Background */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <img src={profileImg} alt="Background" className="w-full h-full object-cover" />
-      </div>
+    <div className="flex flex-col min-h-screen text-gray-900 dark:text-white relative bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-100 dark:from-gray-900 dark:via-blue-950/20 dark:to-gray-900">
 
       {/* Main Content */}
       <main className="relative z-10 flex-grow flex flex-col items-center justify-start py-12 px-6">
@@ -43,43 +44,72 @@ export default function About() {
         {/* Konten utama */}
         <div className="w-full max-w-4xl flex flex-col items-center space-y-10">
 
-          {/* Nama */}
-          <motion.h1
-            className="text-4xl sm:text-5xl font-bold text-center"
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            Zaedar Ghazalba
-          </motion.h1>
+          {/* Profile Card */}
+          <ProfileCard
+            image={profileImg}
+            name="Zaedar Ghazalba"
+            username="zaedarghazalba"
+            title="QA Tester • Mobile Developer • Web Developer"
+            bio="Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) karena percaya bahwa kualitas adalah bagian penting dari sebuah produk digital."
+          />
 
-          {/* Biodata */}
+          {/* Social Media Links */}
           <motion.div
-            className="text-center max-w-2xl"
-            initial={{ opacity: 0, y: -30 }}
+            className="flex justify-center gap-4 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <p className="text-gray-400 mb-2">@zaedarghazalba</p>
-            <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) karena percaya bahwa kualitas adalah bagian penting dari sebuah produk digital.
-            </p>
-
-            {/* Sosial Media */}
-            <div className="mt-4 flex justify-center space-x-6 text-2xl">
-              <a href="https://wa.me/6281250371835" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:scale-110 transition-transform">
-                <FaWhatsapp />
-              </a>
-              <a href="https://instagram.com/zeedargh" target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:scale-110 transition-transform">
-                <FaInstagram />
-              </a>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:scale-110 transition-transform">
-                <FaEnvelope />
-              </a>
-              <a href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:scale-110 transition-transform">
-                <FaLinkedin />
-              </a>
-            </div>
+            <motion.a
+              href="https://github.com/zaedarghazalba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-xl bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaGithub />
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-xl bg-blue-700 hover:bg-blue-600 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaLinkedin />
+            </motion.a>
+            <motion.a
+              href="https://instagram.com/zeedargh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-xl bg-pink-600 hover:bg-pink-500 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaInstagram />
+            </motion.a>
+            <motion.a
+              href="https://wa.me/6281250371835"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-xl bg-green-600 hover:bg-green-500 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaWhatsapp />
+            </motion.a>
+            <motion.a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-xl bg-blue-500 hover:bg-blue-400 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaEnvelope />
+            </motion.a>
           </motion.div>
 
           {/* Keahlian */}
@@ -137,6 +167,67 @@ export default function About() {
                 <span>React JS</span>
               </div>
             </div>
+          </motion.div>
+
+          {/* Tech Stack Interactive */}
+          <motion.div
+            className="w-full max-w-6xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.9 }}
+          >
+            <TechStackInteractive />
+          </motion.div>
+
+          {/* GitHub Badges/Achievements */}
+          <motion.div
+            className="w-full max-w-6xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.0 }}
+          >
+            <GitHubBadges />
+          </motion.div>
+
+          {/* Pinned Repositories */}
+          <motion.div
+            className="w-full max-w-6xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.1 }}
+          >
+            <PinnedRepos />
+          </motion.div>
+
+          {/* GitHub Stats Section */}
+          <motion.div
+            className="w-full max-w-6xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.2 }}
+          >
+            <h2 className="text-2xl font-bold mb-6 text-center">GitHub Statistics</h2>
+            <GitHubStats />
+          </motion.div>
+
+          {/* GitHub Contributions Calendar */}
+          <motion.div
+            className="w-full max-w-6xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.3 }}
+          >
+            <GitHubContributions username="zaedarghazalba" />
+          </motion.div>
+
+          {/* GitHub Activity Timeline */}
+          <motion.div
+            className="w-full max-w-6xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.4 }}
+          >
+            <GitHubActivity />
           </motion.div>
         </div>
       </main>
