@@ -1,12 +1,28 @@
 // GitHub API Service
 const GITHUB_USERNAME = 'zaedarghazalba'; // Ganti dengan username GitHub Anda
 const GITHUB_API = 'https://api.github.com';
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+
+// Helper function to get headers with authentication
+const getHeaders = () => {
+  const headers = {
+    'Accept': 'application/vnd.github.v3+json',
+  };
+
+  if (GITHUB_TOKEN && GITHUB_TOKEN !== 'your_github_token_here') {
+    headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+  }
+
+  return headers;
+};
 
 export const githubService = {
   // Get user profile
   async getUserProfile() {
     try {
-      const response = await fetch(`${GITHUB_API}/users/${GITHUB_USERNAME}`);
+      const response = await fetch(`${GITHUB_API}/users/${GITHUB_USERNAME}`, {
+        headers: getHeaders()
+      });
       if (!response.ok) throw new Error('Failed to fetch user profile');
       return await response.json();
     } catch (error) {
@@ -19,7 +35,8 @@ export const githubService = {
   async getUserRepos() {
     try {
       const response = await fetch(
-        `${GITHUB_API}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`
+        `${GITHUB_API}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
+        { headers: getHeaders() }
       );
       if (!response.ok) throw new Error('Failed to fetch repositories');
       const repos = await response.json();
@@ -41,7 +58,8 @@ export const githubService = {
   async getRepoLanguages(repoName) {
     try {
       const response = await fetch(
-        `${GITHUB_API}/repos/${GITHUB_USERNAME}/${repoName}/languages`
+        `${GITHUB_API}/repos/${GITHUB_USERNAME}/${repoName}/languages`,
+        { headers: getHeaders() }
       );
       if (!response.ok) throw new Error('Failed to fetch languages');
       return await response.json();
@@ -82,7 +100,8 @@ export const githubService = {
   async getRecentActivity() {
     try {
       const response = await fetch(
-        `${GITHUB_API}/users/${GITHUB_USERNAME}/events/public?per_page=10`
+        `${GITHUB_API}/users/${GITHUB_USERNAME}/events/public?per_page=10`,
+        { headers: getHeaders() }
       );
       if (!response.ok) throw new Error('Failed to fetch activity');
       return await response.json();
