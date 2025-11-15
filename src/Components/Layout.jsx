@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { User, FolderKanban, BadgeCheck } from "lucide-react";
+import { User, FolderKanban, Rocket, BadgeCheck } from "lucide-react";
 import NavbarSidebar from "./NavbarSidebar";
 
 export default function Layout({ children }) {
@@ -44,6 +44,18 @@ export default function Layout({ children }) {
               title="Portfolio"
             >
               <FolderKanban size={20} />
+            </Link>
+
+            <Link
+              to="/projects"
+              className={`p-2 rounded-lg transition-colors ${
+                location.pathname === '/projects'
+                  ? 'bg-blue-600 text-white'
+                  : 'hover:bg-gray-800'
+              }`}
+              title="Project Online"
+            >
+              <Rocket size={20} />
             </Link>
 
             <Link
