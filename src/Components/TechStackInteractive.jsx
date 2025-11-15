@@ -69,7 +69,7 @@ export default function TechStackInteractive() {
       <h3 className="text-2xl font-bold mb-6 text-center">Tech Stack & Skills</h3>
 
       {/* Category Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
         {techStack.map((category, index) => {
           const Icon = category.icon;
           const isSelected = selectedCategory === index;
@@ -78,19 +78,23 @@ export default function TechStackInteractive() {
             <motion.button
               key={index}
               onClick={() => setSelectedCategory(isSelected ? null : index)}
-              className={`relative p-6 rounded-lg overflow-hidden transition-all ${
+              className={`relative p-4 sm:p-6 rounded-xl overflow-hidden transition-all ${
                 isSelected
-                  ? 'ring-4 ring-blue-500 shadow-xl'
-                  : 'hover:shadow-lg'
+                  ? 'ring-4 ring-blue-500 shadow-2xl'
+                  : 'shadow-md hover:shadow-xl'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              style={{
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
+              }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-10`}></div>
               <div className="relative z-10 flex flex-col items-center">
-                <Icon className="text-4xl mb-2" style={{ color: category.skills[0].color }} />
-                <h4 className="text-sm font-semibold text-center">{category.category}</h4>
-                <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <Icon className="text-3xl sm:text-4xl mb-2" style={{ color: category.skills[0].color }} />
+                <h4 className="text-xs sm:text-sm font-semibold text-center">{category.category}</h4>
+                <span className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
                   {category.skills.length} skills
                 </span>
               </div>
@@ -105,9 +109,9 @@ export default function TechStackInteractive() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="space-y-4"
+          className="space-y-3 sm:space-y-4"
         >
-          <h4 className="text-xl font-semibold mb-4">
+          <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
             {techStack[selectedCategory].category}
           </h4>
 
@@ -128,18 +132,18 @@ export default function TechStackInteractive() {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <SkillIcon
-                      className="text-2xl"
+                      className="text-xl sm:text-2xl flex-shrink-0"
                       style={{ color: skill.color }}
                     />
-                    <span className="font-medium">{skill.name}</span>
+                    <span className="font-medium text-sm sm:text-base">{skill.name}</span>
                   </div>
-                  <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                  <span className="text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 ml-2">
                     {skill.level}%
                   </span>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div className="w-full h-2.5 sm:h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <motion.div
                     className="h-full rounded-full"
                     style={{
@@ -151,12 +155,12 @@ export default function TechStackInteractive() {
                   />
                 </div>
 
-                {/* Hover tooltip */}
+                {/* Hover tooltip - only on desktop */}
                 {isHovered && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute -top-8 right-0 bg-gray-800 text-white text-xs px-3 py-1 rounded shadow-lg"
+                    className="hidden sm:block absolute -top-8 right-0 bg-gray-800 text-white text-xs px-3 py-1 rounded shadow-lg z-10"
                   >
                     Proficiency: {skill.level}%
                   </motion.div>

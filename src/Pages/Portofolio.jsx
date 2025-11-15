@@ -66,7 +66,7 @@ export default function Portfolio() {
 
         {/* Search and Filter */}
         <motion.div
-          className="mb-6 space-y-4"
+          className="mb-6 space-y-3 sm:space-y-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -78,29 +78,29 @@ export default function Portfolio() {
               placeholder="Search repositories..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base shadow-sm"
             />
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2">
-            <FaFilter className="text-gray-500 flex-shrink-0" />
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <FaFilter className="text-gray-500 flex-shrink-0 text-sm sm:text-base" />
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap transition ${
+              className={`px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm sm:text-base ${
                 filter === 'all'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
+                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
               }`}
             >
               All ({repos.length})
             </button>
             <button
               onClick={() => setFilter('starred')}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap transition ${
+              className={`px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm sm:text-base ${
                 filter === 'starred'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
+                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
               }`}
             >
               Starred
@@ -109,10 +109,10 @@ export default function Portfolio() {
               <button
                 key={lang}
                 onClick={() => setFilter(lang)}
-                className={`px-4 py-2 rounded-lg whitespace-nowrap transition ${
+                className={`px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm sm:text-base ${
                   filter === lang
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
+                    : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
                 }`}
               >
                 {lang}
@@ -143,7 +143,7 @@ export default function Portfolio() {
         )}
 
         {!loading && filteredRepos.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             {filteredRepos.map((repo, index) => (
               <RepoCard key={repo.id} repo={repo} index={index} />
             ))}

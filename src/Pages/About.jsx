@@ -55,7 +55,7 @@ export default function About() {
 
           {/* Social Media Links */}
           <motion.div
-            className="flex justify-center gap-4 flex-wrap"
+            className="flex justify-center gap-3 sm:gap-4 flex-wrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -64,7 +64,7 @@ export default function About() {
               href="https://github.com/zaedarghazalba"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 rounded-xl bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -74,7 +74,7 @@ export default function About() {
               href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 rounded-xl bg-blue-700 hover:bg-blue-600 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-700 hover:bg-blue-600 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -84,7 +84,7 @@ export default function About() {
               href="https://instagram.com/zeedargh"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 rounded-xl bg-pink-600 hover:bg-pink-500 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-pink-600 hover:bg-pink-500 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -94,7 +94,7 @@ export default function About() {
               href="https://wa.me/6281250371835"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 rounded-xl bg-green-600 hover:bg-green-500 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-600 hover:bg-green-500 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -104,7 +104,7 @@ export default function About() {
               href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 rounded-xl bg-blue-500 hover:bg-blue-400 flex items-center justify-center text-white text-2xl shadow-lg transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-500 hover:bg-blue-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -114,57 +114,57 @@ export default function About() {
 
           {/* Keahlian */}
           <motion.div
-            className="w-full bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md"
+            className="w-full bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-6 shadow-lg"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.6 }}
           >
-            <h2 className="text-xl font-semibold mb-4 text-center">Keahlian</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold mb-5 sm:mb-6 text-center">Keahlian</h2>
 
             {/* Roles */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-center">
-              <div className="flex items-center justify-center space-x-2">
-                <FaBug className="text-red-500 text-xl" />
-                <span>QA Tester</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-5 sm:mb-6">
+              <div className="flex items-center justify-center space-x-2 bg-red-50 dark:bg-red-900/20 p-3 rounded-xl">
+                <FaBug className="text-red-500 text-lg sm:text-xl flex-shrink-0" />
+                <span className="text-sm sm:text-base font-medium">QA Tester</span>
               </div>
-              <div className="flex items-center justify-center space-x-2">
-                <FaMobileAlt className="text-green-500 text-xl" />
-                <span>Mobile Developer</span>
+              <div className="flex items-center justify-center space-x-2 bg-green-50 dark:bg-green-900/20 p-3 rounded-xl">
+                <FaMobileAlt className="text-green-500 text-lg sm:text-xl flex-shrink-0" />
+                <span className="text-sm sm:text-base font-medium">Mobile Developer</span>
               </div>
-              <div className="flex items-center justify-center space-x-2">
-                <FaCode className="text-yellow-500 text-xl" />
-                <span>Web Developer</span>
+              <div className="flex items-center justify-center space-x-2 bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-xl">
+                <FaCode className="text-yellow-500 text-lg sm:text-xl flex-shrink-0" />
+                <span className="text-sm sm:text-base font-medium">Web Developer</span>
               </div>
             </div>
 
-            <hr className="mb-4 border-gray-600" />
+            <hr className="mb-5 sm:mb-6 border-gray-300 dark:border-gray-600" />
 
             {/* Bahasa & Tools */}
-            <h3 className="text-md font-semibold mb-4 text-center">Bahasa & Tools</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 text-center text-sm text-gray-700 dark:text-gray-300">
-              <div className="flex flex-col items-center">
-                <FaPhp className="text-purple-600 text-xl" />
-                <span>PHP</span>
+            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Bahasa & Tools</h3>
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-4">
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <FaPhp className="text-purple-600 text-2xl sm:text-3xl" />
+                <span className="text-xs sm:text-sm font-medium">PHP</span>
               </div>
-              <div className="flex flex-col items-center">
-                <FaLaravel className="text-red-600 text-xl" />
-                <span>Laravel</span>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <FaLaravel className="text-red-600 text-2xl sm:text-3xl" />
+                <span className="text-xs sm:text-sm font-medium">Laravel</span>
               </div>
-              <div className="flex flex-col items-center">
-                <SiKotlin className="text-orange-500 text-xl" />
-                <span>Kotlin</span>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <SiKotlin className="text-orange-500 text-2xl sm:text-3xl" />
+                <span className="text-xs sm:text-sm font-medium">Kotlin</span>
               </div>
-              <div className="flex flex-col items-center">
-                <FaPython className="text-blue-400 text-xl" />
-                <span>Python</span>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <FaPython className="text-blue-400 text-2xl sm:text-3xl" />
+                <span className="text-xs sm:text-sm font-medium">Python</span>
               </div>
-              <div className="flex flex-col items-center">
-                <FaJs className="text-yellow-500 text-xl" />
-                <span>JavaScript</span>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <FaJs className="text-yellow-500 text-2xl sm:text-3xl" />
+                <span className="text-xs sm:text-sm font-medium">JavaScript</span>
               </div>
-              <div className="flex flex-col items-center">
-                <FaReact className="text-cyan-400 text-xl" />
-                <span>React JS</span>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <FaReact className="text-cyan-400 text-2xl sm:text-3xl" />
+                <span className="text-xs sm:text-sm font-medium">React JS</span>
               </div>
             </div>
           </motion.div>
