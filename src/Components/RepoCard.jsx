@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaStar, FaCodeBranch, FaCircle, FaExternalLinkAlt, FaEye, FaInfoCircle } from 'react-icons/fa';
+import { FaStar, FaCodeBranch, FaCircle, FaExternalLinkAlt, FaInfoCircle } from 'react-icons/fa';
 
 const languageColors = {
   JavaScript: '#f1e05a',
@@ -41,7 +41,7 @@ export default function RepoCard({ repo, index = 0 }) {
 
   return (
     <motion.div
-      className="relative h-full min-h-[280px]"
+      className="relative h-full min-h-[240px] sm:min-h-[260px] md:min-h-[280px] w-full"
       style={{ perspective: '1000px' }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ export default function RepoCard({ repo, index = 0 }) {
       >
         {/* Front Side */}
         <motion.div
-          className="absolute inset-0 bg-white dark:bg-gray-800 rounded-xl p-5 shadow-lg border border-gray-200 dark:border-gray-700"
+          className="absolute inset-0 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 shadow-lg border border-gray-200 dark:border-gray-700"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -66,16 +66,16 @@ export default function RepoCard({ repo, index = 0 }) {
         >
           <div className="flex flex-col h-full">
             {/* Header */}
-            <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start justify-between mb-2 sm:mb-3">
               <a
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-2 flex-1 min-w-0"
+                className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0"
                 onClick={(e) => e.stopPropagation()}
               >
                 <span className="truncate">{repo.name}</span>
-                <FaExternalLinkAlt className="text-xs flex-shrink-0" />
+                <FaExternalLinkAlt className="text-[10px] sm:text-xs flex-shrink-0" />
               </a>
               <button
                 onClick={() => setIsFlipped(true)}
@@ -87,12 +87,12 @@ export default function RepoCard({ repo, index = 0 }) {
             </div>
 
             {/* Description */}
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-grow line-clamp-3">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 flex-grow line-clamp-3">
               {repo.description || 'No description provided'}
             </p>
 
             {/* Footer Info */}
-            <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-400 mb-2">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2">
               {repo.language && (
                 <div className="flex items-center gap-1">
                   <FaCircle style={{ color: languageColor }} className="text-xs" />
@@ -122,7 +122,7 @@ export default function RepoCard({ repo, index = 0 }) {
 
         {/* Back Side */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl p-5 shadow-lg"
+          className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 shadow-lg"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -130,8 +130,8 @@ export default function RepoCard({ repo, index = 0 }) {
           }}
         >
           <div className="flex flex-col h-full text-white">
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-lg font-bold">{repo.name}</h3>
+            <div className="flex justify-between items-start mb-3 sm:mb-4">
+              <h3 className="text-base sm:text-lg font-bold truncate pr-2">{repo.name}</h3>
               <button
                 onClick={() => setIsFlipped(false)}
                 className="p-2 rounded-lg hover:bg-white/20 transition-colors"
@@ -141,9 +141,9 @@ export default function RepoCard({ repo, index = 0 }) {
               </button>
             </div>
 
-            <div className="flex-grow space-y-3 text-sm">
+            <div className="flex-grow space-y-2 sm:space-y-3 text-xs sm:text-sm">
               {/* Repository Stats */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
                   <FaStar className="text-yellow-300" />
                   Repository Stats
@@ -174,8 +174,8 @@ export default function RepoCard({ repo, index = 0 }) {
 
               {/* Topics */}
               {repo.topics && repo.topics.length > 0 && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <h4 className="font-semibold mb-2">Topics</h4>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                  <h4 className="font-semibold mb-1.5 sm:mb-2 text-xs sm:text-sm">Topics</h4>
                   <div className="flex flex-wrap gap-1">
                     {repo.topics.slice(0, 5).map((topic) => (
                       <span
@@ -202,9 +202,9 @@ export default function RepoCard({ repo, index = 0 }) {
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg py-2 px-4 text-center font-semibold transition-colors flex items-center justify-center gap-2"
+              className="mt-2 sm:mt-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg py-2 px-3 sm:px-4 text-center font-semibold transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
             >
-              <FaExternalLinkAlt className="text-sm" />
+              <FaExternalLinkAlt className="text-xs" />
               View on GitHub
             </a>
           </div>

@@ -42,31 +42,31 @@ export default function Portfolio() {
 
   return (
     <motion.div
-      className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen p-4 sm:p-8 pb-24"
+      className="w-full max-w-full overflow-x-hidden pb-20 sm:pb-24"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          className="mb-8"
+          className="mb-6 sm:mb-8"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <FaGithub className="text-4xl" />
-            <h1 className="text-3xl sm:text-4xl font-bold">GitHub Portfolio</h1>
+          <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+            <FaGithub className="text-3xl sm:text-4xl" />
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">GitHub Portfolio</h1>
           </div>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Explore my open source projects and contributions
           </p>
         </motion.div>
 
         {/* Search and Filter */}
         <motion.div
-          className="mb-6 space-y-3 sm:space-y-4"
+          className="mb-5 sm:mb-6 space-y-3 sm:space-y-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -78,16 +78,16 @@ export default function Portfolio() {
               placeholder="Search repositories..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base shadow-sm"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 rounded-xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base shadow-sm"
             />
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            <FaFilter className="text-gray-500 flex-shrink-0 text-sm sm:text-base" />
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-1 px-1">
+            <FaFilter className="text-gray-500 flex-shrink-0 text-xs sm:text-sm" />
             <button
               onClick={() => setFilter('all')}
-              className={`px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm sm:text-base ${
+              className={`px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg whitespace-nowrap transition-all text-xs sm:text-sm ${
                 filter === 'all'
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
                   : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
@@ -97,7 +97,7 @@ export default function Portfolio() {
             </button>
             <button
               onClick={() => setFilter('starred')}
-              className={`px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm sm:text-base ${
+              className={`px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg whitespace-nowrap transition-all text-xs sm:text-sm ${
                 filter === 'starred'
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
                   : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
@@ -109,7 +109,7 @@ export default function Portfolio() {
               <button
                 key={lang}
                 onClick={() => setFilter(lang)}
-                className={`px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm sm:text-base ${
+                className={`px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg whitespace-nowrap transition-all text-xs sm:text-sm ${
                   filter === lang
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
                     : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
@@ -143,7 +143,7 @@ export default function Portfolio() {
         )}
 
         {!loading && filteredRepos.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {filteredRepos.map((repo, index) => (
               <RepoCard key={repo.id} repo={repo} index={index} />
             ))}
@@ -165,7 +165,7 @@ export default function Portfolio() {
         )}
       </div>
 
-      <footer className="fixed bottom-0 left-0 w-full text-center py-2 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 z-50">
+      <footer className="fixed bottom-0 left-0 w-full text-center py-2 sm:py-2.5 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-600 dark:text-gray-400 z-50">
         © {new Date().getFullYear()} Zaedar Ghazalba. All rights reserved.
       </footer>
     </motion.div>
