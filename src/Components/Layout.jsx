@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { User, FolderKanban, Rocket, BadgeCheck } from "lucide-react";
 import NavbarSidebar from "./NavbarSidebar";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Layout({ children }) {
   const location = useLocation();
@@ -78,6 +79,9 @@ export default function Layout({ children }) {
           {children}
         </div>
       </main>
+
+      {/* Theme Toggle Button */}
+      <ThemeToggle />
     </div>
   );
 }

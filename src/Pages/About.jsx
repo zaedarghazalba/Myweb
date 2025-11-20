@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import {
   FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin, FaGithub,
   FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel,
-  FaPython, FaJs, FaReact
+  FaPython, FaJs, FaReact, FaPalette
 } from 'react-icons/fa';
-import { SiKotlin } from 'react-icons/si';
+import { SiKotlin, SiCanva, SiOpenai, SiGooglegemini, SiAnthropic } from 'react-icons/si';
 import profileImg from '../Assets/profile.jpg';
 import GitHubStats from '../Components/GitHubStats';
 import GitHubContributions from '../Components/GitHubContributions';
@@ -42,75 +42,140 @@ export default function About() {
         </motion.p>
 
         {/* Konten utama */}
-        <div className="w-full max-w-4xl flex flex-col items-center space-y-10">
+        <div className="w-full max-w-7xl flex flex-col items-center space-y-10">
 
-          {/* Profile Card */}
-          <ProfileCard
-            image={profileImg}
-            name="Zaedar Ghazalba"
-            username="zaedarghazalba"
-            title="QA Tester • Mobile Developer • Web Developer"
-            bio="Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) karena percaya bahwa kualitas adalah bagian penting dari sebuah produk digital."
-          />
+          {/* Profile Section - Side by Side */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-          {/* Social Media Links */}
-          <motion.div
-            className="flex justify-center gap-3 sm:gap-4 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <motion.a
-              href="https://github.com/zaedarghazalba"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
+            {/* Profile Card - Left Side */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <FaGithub />
-            </motion.a>
-            <motion.a
-              href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-700 hover:bg-blue-600 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
+              <ProfileCard
+                image={profileImg}
+                name="Zaedar Ghazalba"
+                username="zaedarghazalba"
+                title="QA Tester • Mobile Developer • Web Developer • Graphic Designer"
+                bio="Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) dan design grafis menggunakan berbagai tools modern karena percaya bahwa kualitas dan estetika adalah bagian penting dari sebuah produk digital."
+              />
+            </motion.div>
+
+            {/* Biodata Card - Right Side */}
+            <motion.div
+              className="w-full bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <FaLinkedin />
-            </motion.a>
-            <motion.a
-              href="https://instagram.com/zeedargh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-pink-600 hover:bg-pink-500 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaInstagram />
-            </motion.a>
-            <motion.a
-              href="https://wa.me/6281250371835"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-600 hover:bg-green-500 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaWhatsapp />
-            </motion.a>
-            <motion.a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-500 hover:bg-blue-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-lg transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaEnvelope />
-            </motion.a>
-          </motion.div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6">Biodata</h2>
+
+              {/* Full Name */}
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Nama Lengkap</h3>
+                <p className="text-lg sm:text-xl font-medium">Zaedar Ghazalba</p>
+              </div>
+
+              {/* Username */}
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Username</h3>
+                <p className="text-lg sm:text-xl font-medium">@zaedarghazalba</p>
+              </div>
+
+              {/* Role */}
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Role</h3>
+                <p className="text-base sm:text-lg">QA Tester • Mobile Developer • Web Developer • Graphic Designer</p>
+              </div>
+
+              {/* Social Media */}
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4">Sosial Media</h3>
+                <div className="space-y-3">
+                  <motion.a
+                    href="https://github.com/zaedarghazalba"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-gray-800 dark:bg-gray-900 flex items-center justify-center text-white">
+                      <FaGithub className="text-xl" />
+                    </div>
+                    <div>
+                      <p className="font-semibold">GitHub</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">@zaedarghazalba</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-blue-700 flex items-center justify-center text-white">
+                      <FaLinkedin className="text-xl" />
+                    </div>
+                    <div>
+                      <p className="font-semibold">LinkedIn</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Zaedar Ghazalba</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://instagram.com/zeedargh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-pink-600 flex items-center justify-center text-white">
+                      <FaInstagram className="text-xl" />
+                    </div>
+                    <div>
+                      <p className="font-semibold">Instagram</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">@zeedargh</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://wa.me/6281250371835"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-green-600 flex items-center justify-center text-white">
+                      <FaWhatsapp className="text-xl" />
+                    </div>
+                    <div>
+                      <p className="font-semibold">WhatsApp</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">+62 812-5037-1835</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center text-white">
+                      <FaEnvelope className="text-xl" />
+                    </div>
+                    <div>
+                      <p className="font-semibold">Email</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">zaedaralba11202@gmail.com</p>
+                    </div>
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Keahlian */}
           <motion.div
@@ -122,7 +187,7 @@ export default function About() {
             <h2 className="text-xl sm:text-2xl font-semibold mb-5 sm:mb-6 text-center">Keahlian</h2>
 
             {/* Roles */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-5 sm:mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5 sm:mb-6">
               <div className="flex items-center justify-center space-x-2 bg-red-50 dark:bg-red-900/20 p-3 rounded-xl">
                 <FaBug className="text-red-500 text-lg sm:text-xl flex-shrink-0" />
                 <span className="text-sm sm:text-base font-medium">QA Tester</span>
@@ -135,13 +200,17 @@ export default function About() {
                 <FaCode className="text-yellow-500 text-lg sm:text-xl flex-shrink-0" />
                 <span className="text-sm sm:text-base font-medium">Web Developer</span>
               </div>
+              <div className="flex items-center justify-center space-x-2 bg-purple-50 dark:bg-purple-900/20 p-3 rounded-xl">
+                <FaPalette className="text-purple-500 text-lg sm:text-xl flex-shrink-0" />
+                <span className="text-sm sm:text-base font-medium">Graphic Designer</span>
+              </div>
             </div>
 
             <hr className="mb-5 sm:mb-6 border-gray-300 dark:border-gray-600" />
 
             {/* Bahasa & Tools */}
             <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Bahasa & Tools</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-4 mb-6">
               <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                 <FaPhp className="text-purple-600 text-2xl sm:text-3xl" />
                 <span className="text-xs sm:text-sm font-medium">PHP</span>
@@ -165,6 +234,29 @@ export default function About() {
               <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                 <FaReact className="text-cyan-400 text-2xl sm:text-3xl" />
                 <span className="text-xs sm:text-sm font-medium">React JS</span>
+              </div>
+            </div>
+
+            <hr className="mb-5 sm:mb-6 border-gray-300 dark:border-gray-600" />
+
+            {/* Design Grafis */}
+            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Design Grafis & AI Tools</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
+                <SiCanva className="text-[#00C4CC] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-medium">Canva</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
+                <SiOpenai className="text-[#10A37F] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-medium">ChatGPT</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
+                <SiGooglegemini className="text-[#8E75B2] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-medium">Gemini</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
+                <SiAnthropic className="text-[#D4A373] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-medium">Claude</span>
               </div>
             </div>
           </motion.div>
