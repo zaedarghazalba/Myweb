@@ -35,6 +35,50 @@ html, body {
     }
   }
 
+  /* Shiny Text Effect */
+  .shiny-text {
+    background: linear-gradient(
+      90deg,
+      #6366f1 0%,
+      #8b5cf6 20%,
+      #d946ef 40%,
+      #f59e0b 60%,
+      #8b5cf6 80%,
+      #6366f1 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shine 3s linear infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  /* Dark mode shiny text - brighter colors */
+  :root.dark .shiny-text {
+    background: linear-gradient(
+      90deg,
+      #818cf8 0%,
+      #a78bfa 20%,
+      #e879f9 40%,
+      #fbbf24 60%,
+      #a78bfa 80%,
+      #818cf8 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -64,5 +108,59 @@ html, body {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Infinite scroll animations */
+  @keyframes scroll-infinite {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-33.333%, 0, 0);
+    }
+  }
+
+  @keyframes scroll-infinite-reverse {
+    0% {
+      transform: translate3d(-33.333%, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .animate-scroll-infinite {
+    animation: scroll-infinite 30s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .animate-scroll-infinite-reverse {
+    animation: scroll-infinite-reverse 30s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Pause animation on hover */
+  .animate-scroll-infinite:hover,
+  .animate-scroll-infinite-reverse:hover {
+    animation-play-state: paused;
+  }
+
+  /* Marquee gradient for dark mode */
+  :root.dark .rfm-marquee {
+    --gradient-color: rgba(17, 24, 39, 1);
+  }
+
+  /* Marquee gradient for light mode */
+  :root:not(.dark) .rfm-marquee {
+    --gradient-color: rgba(255, 255, 255, 1);
+  }
+
+  /* Override default gradient */
+  .rfm-overlay {
+    background: linear-gradient(to right, var(--gradient-color), transparent, var(--gradient-color));
   }
 }

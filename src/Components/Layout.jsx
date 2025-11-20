@@ -2,12 +2,15 @@ import { Link, useLocation } from "react-router-dom";
 import { User, FolderKanban, Rocket, BadgeCheck } from "lucide-react";
 import NavbarSidebar from "./NavbarSidebar";
 import ThemeToggle from "./ThemeToggle";
+import HyperspeedBackground from "./HyperspeedBackground";
 
 export default function Layout({ children }) {
   const location = useLocation();
 
   return (
-    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white relative">
+    <div className="flex min-h-screen bg-transparent text-gray-900 dark:text-white relative">
+      {/* Hyperspeed Background */}
+      <HyperspeedBackground />
       {/* Desktop Sidebar - hanya tampil di desktop */}
       <div className="hidden md:block">
         <NavbarSidebar />

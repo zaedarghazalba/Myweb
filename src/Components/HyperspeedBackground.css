@@ -1,0 +1,18 @@
+.hyperspeed-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Dark mode background */
+:root.dark .hyperspeed-canvas {
+  background: linear-gradient(to bottom, #000000, #0a0a1a);
+}
+
+/* Light mode background */
+:root:not(.dark) .hyperspeed-canvas {
+  background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+}

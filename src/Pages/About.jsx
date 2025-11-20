@@ -1,5 +1,6 @@
 import '../index.css';
 import { motion } from 'framer-motion';
+import Marquee from 'react-fast-marquee';
 import {
   FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin, FaGithub,
   FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel,
@@ -16,14 +17,14 @@ import PinnedRepos from '../Components/PinnedRepos';
 import ProfileCard from '../Components/ProfileCard';
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen text-gray-900 dark:text-white relative bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-100 dark:from-gray-900 dark:via-blue-950/20 dark:to-gray-900">
+    <div className="flex flex-col min-h-screen text-gray-900 dark:text-white relative">
 
       {/* Main Content */}
       <main className="relative z-10 flex-grow flex flex-col items-center justify-start py-12 px-6">
 
         {/* H1 Intro */}
         <motion.h1
-          className="text-4xl sm:text-5xl font-bold text-center mb-4"
+          className="text-4xl sm:text-5xl font-bold text-center mb-4 shiny-text"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -210,54 +211,97 @@ export default function About() {
 
             {/* Bahasa & Tools */}
             <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Bahasa & Tools</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-4 mb-6">
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <FaPhp className="text-purple-600 text-2xl sm:text-3xl" />
-                <span className="text-xs sm:text-sm font-medium">PHP</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <FaLaravel className="text-red-600 text-2xl sm:text-3xl" />
-                <span className="text-xs sm:text-sm font-medium">Laravel</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <SiKotlin className="text-orange-500 text-2xl sm:text-3xl" />
-                <span className="text-xs sm:text-sm font-medium">Kotlin</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <FaPython className="text-blue-400 text-2xl sm:text-3xl" />
-                <span className="text-xs sm:text-sm font-medium">Python</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <FaJs className="text-yellow-500 text-2xl sm:text-3xl" />
-                <span className="text-xs sm:text-sm font-medium">JavaScript</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <FaReact className="text-cyan-400 text-2xl sm:text-3xl" />
-                <span className="text-xs sm:text-sm font-medium">React JS</span>
-              </div>
+            <div className="mb-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700">
+              <Marquee
+                gradient={false}
+                speed={40}
+                pauseOnHover={true}
+                className="py-2"
+              >
+                {[...Array(3)].map((_, index) => (
+                  <div key={index} className="flex items-center gap-8 mx-4">
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 group-hover:bg-purple-200 dark:group-hover:bg-purple-900/50 transition-colors">
+                        <FaPhp className="text-purple-600 dark:text-purple-400 text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">PHP</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-red-100 dark:bg-red-900/30 group-hover:bg-red-200 dark:group-hover:bg-red-900/50 transition-colors">
+                        <FaLaravel className="text-red-600 dark:text-red-400 text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Laravel</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-orange-100 dark:bg-orange-900/30 group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors">
+                        <SiKotlin className="text-orange-500 dark:text-orange-400 text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Kotlin</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
+                        <FaPython className="text-blue-500 dark:text-blue-400 text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Python</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-900/50 transition-colors">
+                        <FaJs className="text-yellow-500 dark:text-yellow-400 text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">JavaScript</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-900/50 transition-colors">
+                        <FaReact className="text-cyan-500 dark:text-cyan-400 text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">React JS</span>
+                    </div>
+                  </div>
+                ))}
+              </Marquee>
             </div>
 
             <hr className="mb-5 sm:mb-6 border-gray-300 dark:border-gray-600" />
 
-            {/* Design Grafis */}
+            {/* Design Grafis & AI Tools */}
             <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Design Grafis & AI Tools</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
-                <SiCanva className="text-[#00C4CC] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-medium">Canva</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
-                <SiOpenai className="text-[#10A37F] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-medium">ChatGPT</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
-                <SiGooglegemini className="text-[#8E75B2] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-medium">Gemini</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
-                <SiAnthropic className="text-[#D4A373] text-2xl sm:text-3xl group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-medium">Claude</span>
-              </div>
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700">
+              <Marquee
+                gradient={false}
+                speed={40}
+                direction="right"
+                pauseOnHover={true}
+                className="py-2"
+              >
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="flex items-center gap-8 mx-4">
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-cyan-50 dark:bg-cyan-900/30 group-hover:bg-cyan-100 dark:group-hover:bg-cyan-900/50 transition-colors">
+                        <SiCanva className="text-[#00C4CC] text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Canva</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 transition-colors">
+                        <SiOpenai className="text-[#10A37F] text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">ChatGPT</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-purple-50 dark:bg-purple-900/30 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50 transition-colors">
+                        <SiGooglegemini className="text-[#8E75B2] text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Gemini</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
+                      <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-900/30 group-hover:bg-amber-100 dark:group-hover:bg-amber-900/50 transition-colors">
+                        <SiAnthropic className="text-[#D4A373] text-5xl" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Claude</span>
+                    </div>
+                  </div>
+                ))}
+              </Marquee>
             </div>
           </motion.div>
 
