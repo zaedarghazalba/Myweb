@@ -20,15 +20,15 @@ export default function Portfolio() {
   const designGraphicsPortfolio = [
     {
       id: 1,
-      title: 'Design Graphics Project 1',
+      title: 'Design Graphics Project Beauty Theme',
       category: 'Design Graphics',
       description: 'Creative graphic design showcasing visual storytelling',
       image: '/images/portfolio/design-graphics/1.png',
-      tags: ['Graphic Design', 'Visual Design', 'Branding']
+      tags: ['Visual Design', 'Branding', 'Illustration']
     },
     {
       id: 2,
-      title: 'Design Graphics Project 2',
+      title: 'Design Graphics Project Social Media Theme',
       category: 'Design Graphics',
       description: 'Modern graphic design with bold typography and colors',
       image: '/images/portfolio/design-graphics/2.png',
@@ -36,7 +36,7 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: 'Design Graphics Project 3',
+      title: 'Design Graphics Project Other Theme',
       category: 'Design Graphics',
       description: 'Innovative graphic design combining art and functionality',
       image: '/images/portfolio/design-graphics/3.png',
@@ -48,26 +48,26 @@ export default function Portfolio() {
   const motionGraphicsPortfolio = [
     {
       id: 4,
-      title: 'Brand Animation',
+      title: 'Comming Soon Animation',
       category: 'Motion Graphics',
       description: 'Dynamic brand animation with smooth transitions',
-      image: 'https://via.placeholder.com/600x400/4F46E5/FFFFFF?text=Brand+Animation',
+      image: '',
       tags: ['Animation', 'Motion Design', 'Branding']
     },
     {
       id: 5,
-      title: 'UI Animation',
+      title: 'Comming Soon Animation UI',
       category: 'Motion Graphics',
       description: 'Interactive UI animations for better user experience',
-      image: 'https://via.placeholder.com/600x400/10B981/FFFFFF?text=UI+Animation',
+      image: '',
       tags: ['UI Animation', 'Micro-interactions', 'UX']
     },
     {
       id: 6,
-      title: 'Explainer Video',
+      title: 'Comming Soon Animation',
       category: 'Motion Graphics',
       description: 'Engaging explainer video with custom illustrations',
-      image: 'https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Explainer+Video',
+      image: '',
       tags: ['Video', 'Storytelling', 'Animation']
     }
   ];
@@ -76,26 +76,26 @@ export default function Portfolio() {
   const graphicsPortfolio3D = [
     {
       id: 7,
-      title: '3D Product Rendering',
+      title: 'Comming Soon Animation',
       category: '3D Graphics',
       description: 'Photorealistic 3D product visualization',
-      image: 'https://via.placeholder.com/600x400/EF4444/FFFFFF?text=3D+Product',
+      image: '',
       tags: ['3D Modeling', 'Rendering', 'Product Visualization']
     },
     {
       id: 8,
-      title: '3D Character Design',
+      title: 'Comming Soon Animation',
       category: '3D Graphics',
       description: 'Creative 3D character modeling and texturing',
-      image: 'https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=3D+Character',
+      image: '',
       tags: ['Character Design', '3D Art', 'Modeling']
     },
     {
       id: 9,
-      title: 'Architectural Visualization',
+      title: 'Comming Soon Animation',
       category: '3D Graphics',
       description: 'Realistic 3D architectural renders and walkthroughs',
-      image: 'https://via.placeholder.com/600x400/EC4899/FFFFFF?text=Architecture+3D',
+      image: '',
       tags: ['Architecture', 'Visualization', '3D Rendering']
     }
   ];
