@@ -1,68 +1,163 @@
 import '../index.css';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import githubService from '../services/githubService';
 import RepoCard from '../Components/RepoCard';
-import { FaFilter, FaPalette, FaCode } from 'react-icons/fa';
+import { FaFilter, FaPalette, FaCode, FaPaintBrush, FaVideo, FaCube, FaTimes, FaChevronLeft, FaChevronRight, FaInfoCircle, FaEyeSlash } from 'react-icons/fa';
 
 export default function Portfolio() {
   const [portfolioType, setPortfolioType] = useState('design'); // 'design' or 'webdev'
+  const [designCategory, setDesignCategory] = useState('design-graphics'); // 'design-graphics', 'motion-graphics', '3d-graphics'
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showInfo, setShowInfo] = useState(true);
 
-  // Sample data for design portfolio
-  const designPortfolio = [
+  // Design Graphics Portfolio - from designgraph folder
+  const designGraphicsPortfolio = [
     {
       id: 1,
-      title: 'Brand Identity Design',
-      category: 'Branding',
-      description: 'Complete brand identity design including logo, color palette, and guidelines',
-      image: 'https://via.placeholder.com/600x400/4F46E5/FFFFFF?text=Brand+Identity',
-      tags: ['Logo Design', 'Branding', 'Visual Identity']
+      title: 'Design Graphics Project 1',
+      category: 'Design Graphics',
+      description: 'Creative graphic design showcasing visual storytelling',
+      image: '/images/portfolio/design-graphics/1.png',
+      tags: ['Graphic Design', 'Visual Design', 'Branding']
     },
     {
       id: 2,
-      title: 'UI/UX Mobile App',
-      category: 'UI/UX Design',
-      description: 'Modern mobile application interface design with user-centered approach',
-      image: 'https://via.placeholder.com/600x400/10B981/FFFFFF?text=Mobile+UI',
-      tags: ['UI Design', 'UX Design', 'Mobile']
+      title: 'Design Graphics Project 2',
+      category: 'Design Graphics',
+      description: 'Modern graphic design with bold typography and colors',
+      image: '/images/portfolio/design-graphics/2.png',
+      tags: ['Typography', 'Color Theory', 'Layout Design']
     },
     {
       id: 3,
-      title: 'Social Media Graphics',
-      category: 'Social Media',
-      description: 'Eye-catching social media graphics for various platforms',
-      image: 'https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Social+Media',
-      tags: ['Instagram', 'Facebook', 'Graphics']
-    },
+      title: 'Design Graphics Project 3',
+      category: 'Design Graphics',
+      description: 'Innovative graphic design combining art and functionality',
+      image: '/images/portfolio/design-graphics/3.png',
+      tags: ['Digital Art', 'Visual Communication', 'Creative Design']
+    }
+  ];
+
+  // Motion Graphics Portfolio
+  const motionGraphicsPortfolio = [
     {
       id: 4,
-      title: 'Poster Design',
-      category: 'Print Design',
-      description: 'Creative poster designs for events and marketing campaigns',
-      image: 'https://via.placeholder.com/600x400/EF4444/FFFFFF?text=Poster+Design',
-      tags: ['Poster', 'Print', 'Marketing']
+      title: 'Brand Animation',
+      category: 'Motion Graphics',
+      description: 'Dynamic brand animation with smooth transitions',
+      image: 'https://via.placeholder.com/600x400/4F46E5/FFFFFF?text=Brand+Animation',
+      tags: ['Animation', 'Motion Design', 'Branding']
     },
     {
       id: 5,
-      title: 'Website Landing Page',
-      category: 'Web Design',
-      description: 'Responsive landing page design with modern aesthetics',
-      image: 'https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=Landing+Page',
-      tags: ['Web Design', 'Landing Page', 'Responsive']
+      title: 'UI Animation',
+      category: 'Motion Graphics',
+      description: 'Interactive UI animations for better user experience',
+      image: 'https://via.placeholder.com/600x400/10B981/FFFFFF?text=UI+Animation',
+      tags: ['UI Animation', 'Micro-interactions', 'UX']
     },
     {
       id: 6,
-      title: 'Packaging Design',
-      category: 'Product Design',
-      description: 'Product packaging design with attention to detail',
-      image: 'https://via.placeholder.com/600x400/EC4899/FFFFFF?text=Packaging',
-      tags: ['Packaging', 'Product', 'Branding']
+      title: 'Explainer Video',
+      category: 'Motion Graphics',
+      description: 'Engaging explainer video with custom illustrations',
+      image: 'https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Explainer+Video',
+      tags: ['Video', 'Storytelling', 'Animation']
     }
   ];
+
+  // 3D Graphics Portfolio
+  const graphicsPortfolio3D = [
+    {
+      id: 7,
+      title: '3D Product Rendering',
+      category: '3D Graphics',
+      description: 'Photorealistic 3D product visualization',
+      image: 'https://via.placeholder.com/600x400/EF4444/FFFFFF?text=3D+Product',
+      tags: ['3D Modeling', 'Rendering', 'Product Visualization']
+    },
+    {
+      id: 8,
+      title: '3D Character Design',
+      category: '3D Graphics',
+      description: 'Creative 3D character modeling and texturing',
+      image: 'https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=3D+Character',
+      tags: ['Character Design', '3D Art', 'Modeling']
+    },
+    {
+      id: 9,
+      title: 'Architectural Visualization',
+      category: '3D Graphics',
+      description: 'Realistic 3D architectural renders and walkthroughs',
+      image: 'https://via.placeholder.com/600x400/EC4899/FFFFFF?text=Architecture+3D',
+      tags: ['Architecture', 'Visualization', '3D Rendering']
+    }
+  ];
+
+  // Get current portfolio based on category
+  const getCurrentPortfolio = () => {
+    switch(designCategory) {
+      case 'design-graphics':
+        return designGraphicsPortfolio;
+      case 'motion-graphics':
+        return motionGraphicsPortfolio;
+      case '3d-graphics':
+        return graphicsPortfolio3D;
+      default:
+        return designGraphicsPortfolio;
+    }
+  };
+
+  // Lightbox functions
+  const openLightbox = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+
+  const goToNext = () => {
+    const portfolio = getCurrentPortfolio();
+    setCurrentImageIndex((prev) => (prev + 1) % portfolio.length);
+  };
+
+  const goToPrevious = () => {
+    const portfolio = getCurrentPortfolio();
+    setCurrentImageIndex((prev) => (prev - 1 + portfolio.length) % portfolio.length);
+  };
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+
+      if (e.key === 'Escape') {
+        setLightboxOpen(false);
+        document.body.style.overflow = 'unset';
+      }
+      if (e.key === 'ArrowRight') {
+        const portfolio = getCurrentPortfolio();
+        setCurrentImageIndex((prev) => (prev + 1) % portfolio.length);
+      }
+      if (e.key === 'ArrowLeft') {
+        const portfolio = getCurrentPortfolio();
+        setCurrentImageIndex((prev) => (prev - 1 + portfolio.length) % portfolio.length);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, designCategory]);
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -151,60 +246,119 @@ export default function Portfolio() {
 
         {/* Design Grafis Portfolio */}
         {portfolioType === 'design' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-          >
-            {designPortfolio.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+          <>
+            {/* Category Filter Buttons */}
+            <motion.div
+              className="mb-6 flex gap-3 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <motion.button
+                onClick={() => setDesignCategory('design-graphics')}
+                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg font-semibold transition-all ${
+                  designCategory === 'design-graphics'
+                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-500/50'
+                    : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {/* Image */}
-                <div className="relative overflow-hidden h-48 sm:h-56">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+                <FaPaintBrush />
+                <span className="text-sm sm:text-base">Design Graphics</span>
+              </motion.button>
 
-                {/* Content */}
-                <div className="p-4 sm:p-5">
-                  <div className="mb-2">
-                    <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide">
-                      {item.category}
-                    </span>
+              <motion.button
+                onClick={() => setDesignCategory('motion-graphics')}
+                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg font-semibold transition-all ${
+                  designCategory === 'motion-graphics'
+                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/50'
+                    : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaVideo />
+                <span className="text-sm sm:text-base">Motion Graphics</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setDesignCategory('3d-graphics')}
+                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg font-semibold transition-all ${
+                  designCategory === '3d-graphics'
+                    ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/50'
+                    : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaCube />
+                <span className="text-sm sm:text-base">3D Graphics</span>
+              </motion.button>
+            </motion.div>
+
+            {/* Portfolio Grid */}
+            <motion.div
+              key={designCategory}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+            >
+              {getCurrentPortfolio().map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+                >
+                  {/* Image */}
+                  <div
+                    className="relative overflow-hidden h-48 sm:h-56 cursor-pointer"
+                    onClick={() => openLightbox(index)}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="text-white text-4xl">🔍</span>
+                    </div>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    {item.description}
-                  </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-1 text-xs rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
-                      >
-                        {tag}
+                  {/* Content */}
+                  <div className="p-4 sm:p-5">
+                    <div className="mb-2">
+                      <span className="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide">
+                        {item.category}
                       </span>
-                    ))}
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      {item.description}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {item.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-1 text-xs rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </>
         )}
 
         {/* Web Developer Portfolio */}
@@ -316,6 +470,147 @@ export default function Portfolio() {
       <footer className="fixed bottom-0 left-0 w-full text-center py-2 sm:py-2.5 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-600 dark:text-gray-400 z-50">
         © {new Date().getFullYear()} Zaedar Ghazalba. All rights reserved.
       </footer>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4"
+            onClick={closeLightbox}
+          >
+            {/* Top Right Buttons */}
+            <div className="absolute top-4 right-4 z-[110] flex gap-2">
+              {/* Toggle Info Button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ delay: 0.2 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowInfo(!showInfo);
+                }}
+                className="p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all backdrop-blur-sm"
+                title={showInfo ? "Sembunyikan Info" : "Tampilkan Info"}
+              >
+                {showInfo ? <FaEyeSlash size={24} /> : <FaInfoCircle size={24} />}
+              </motion.button>
+
+              {/* Close Button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ delay: 0.2 }}
+                onClick={closeLightbox}
+                className="p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all backdrop-blur-sm"
+                title="Tutup"
+              >
+                <FaTimes size={24} />
+              </motion.button>
+            </div>
+
+            {/* Previous Button */}
+            {getCurrentPortfolio().length > 1 && (
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ delay: 0.2 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPrevious();
+                }}
+                className="absolute left-4 z-[110] p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all backdrop-blur-sm"
+              >
+                <FaChevronLeft size={24} />
+              </motion.button>
+            )}
+
+            {/* Next Button */}
+            {getCurrentPortfolio().length > 1 && (
+              <motion.button
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ delay: 0.2 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNext();
+                }}
+                className="absolute right-4 z-[110] p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all backdrop-blur-sm"
+              >
+                <FaChevronRight size={24} />
+              </motion.button>
+            )}
+
+            {/* Image Container */}
+            <motion.div
+              key={currentImageIndex}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="relative w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative">
+                <img
+                  src={getCurrentPortfolio()[currentImageIndex]?.image}
+                  alt={getCurrentPortfolio()[currentImageIndex]?.title}
+                  className={`max-w-[95vw] w-auto h-auto object-contain rounded-lg shadow-2xl transition-all duration-300 ${
+                    showInfo ? 'max-h-[75vh]' : 'max-h-[90vh]'
+                  }`}
+                />
+              </div>
+            </motion.div>
+
+            {/* Image Counter - Always Visible */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute top-4 left-4 z-[110] px-4 py-2 bg-black/60 backdrop-blur-sm rounded-full text-white text-sm font-medium"
+            >
+              {currentImageIndex + 1} / {getCurrentPortfolio().length}
+            </motion.div>
+
+            {/* Image Info - Positioned at bottom */}
+            <AnimatePresence>
+              {showInfo && (
+                <motion.div
+                  key={`info-${currentImageIndex}`}
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 100, opacity: 0 }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md p-4 sm:p-6 rounded-xl border border-white/10 max-w-4xl mx-auto"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <h3 className="text-white text-lg sm:text-xl font-bold mb-2">
+                    {getCurrentPortfolio()[currentImageIndex]?.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-3">
+                    {getCurrentPortfolio()[currentImageIndex]?.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {getCurrentPortfolio()[currentImageIndex]?.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 text-xs rounded-full bg-white/20 text-white backdrop-blur-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
