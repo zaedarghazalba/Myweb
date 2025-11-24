@@ -1,6 +1,7 @@
 import '../index.css';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt, FaCode, FaRocket } from 'react-icons/fa';
+import SEO from '../Components/SEO';
 
 export default function Projects() {
   const projects = [
@@ -29,6 +30,12 @@ export default function Projects() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <SEO
+        title="Online Projects - Zaedar Ghazalba"
+        description="Project live dan aplikasi yang telah di-deploy oleh Zaedar Ghazalba. Termasuk Budget Planner dan berbagai aplikasi web modern lainnya."
+        keywords="Online Projects Zaedar Ghazalba, Live Projects, Budget Planner, React Applications, Web Applications, Deployed Projects Indonesia"
+        type="website"
+      />
       <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

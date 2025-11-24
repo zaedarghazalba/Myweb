@@ -15,22 +15,27 @@ import TechStackInteractive from '../Components/TechStackInteractive';
 import GitHubBadges from '../Components/GitHubBadges';
 import PinnedRepos from '../Components/PinnedRepos';
 import ProfileCard from '../Components/ProfileCard';
+import SEO from '../Components/SEO';
+import DecryptedText from '../Components/DecryptedText';
+
 export default function About() {
   return (
     <div className="flex flex-col min-h-screen text-gray-900 dark:text-white relative">
+      <SEO
+        title="About - Zaedar Ghazalba"
+        description="Zaedar Ghazalba adalah Junior Programmer yang berfokus pada Web Development, Mobile Development, QA Testing, dan Graphic Design. Berpengalaman dengan React, Laravel, Kotlin, dan Python."
+        keywords="Zaedar Ghazalba, About, Junior Programmer Indonesia, Web Developer Indonesia, Mobile Developer, QA Tester, React Developer, Laravel, Kotlin, Python, Portfolio Developer Indonesia"
+        type="profile"
+      />
 
       {/* Main Content */}
       <main className="relative z-10 flex-grow flex flex-col items-center justify-start py-12 px-6">
 
         {/* H1 Intro */}
-        <motion.h1
-          className="text-4xl sm:text-5xl font-bold text-center mb-4 shiny-text"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          Hello World, I'm Zaedar Ghazalba
-        </motion.h1>
+        <DecryptedText
+          text="Hello World, I'm Zaedar Ghazalba"
+          className="text-4xl sm:text-5xl font-bold text-center mb-4"
+        />
 
         {/* Deskripsi singkat */}
         <motion.p

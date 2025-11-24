@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import githubService from '../services/githubService';
 import RepoCard from '../Components/RepoCard';
 import { FaFilter, FaPalette, FaCode, FaPaintBrush, FaVideo, FaCube, FaTimes, FaChevronLeft, FaChevronRight, FaInfoCircle, FaEyeSlash } from 'react-icons/fa';
+import SEO from '../Components/SEO';
 
 export default function Portfolio() {
   const [portfolioType, setPortfolioType] = useState('design'); // 'design' or 'webdev'
@@ -199,6 +200,12 @@ export default function Portfolio() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <SEO
+        title="Portfolio - Zaedar Ghazalba"
+        description="Lihat portfolio karya Zaedar Ghazalba meliputi Web Development, Design Graphics, Motion Graphics, dan 3D Graphics. Project React, Laravel, dan berbagai design kreatif."
+        keywords="Portfolio Zaedar Ghazalba, Web Development Portfolio, Graphic Design Portfolio, React Projects, Laravel Projects, Design Graphics Indonesia, Motion Graphics, 3D Graphics"
+        type="website"
+      />
       <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

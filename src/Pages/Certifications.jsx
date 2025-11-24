@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import alibabaImg from '../Assets/alibaba.png';
 import javascriptImg from '../Assets/javascript.png';
 import dataengImg from '../Assets/dataeng.png';
+import SEO from '../Components/SEO';
 
 export default function Certifications() {
   const certs = [
@@ -22,6 +23,12 @@ export default function Certifications() {
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen p-6 sm:p-12">
+      <SEO
+        title="Certifications - Zaedar Ghazalba"
+        description="Sertifikasi profesional Zaedar Ghazalba termasuk Alibaba Cloud Certified Developers, JavaScript Basic, dan Data Engineering Professional Certification."
+        keywords="Certifications Zaedar Ghazalba, Alibaba Cloud Certified, JavaScript Certification, Data Engineering, Professional Certifications Indonesia, IT Certifications"
+        type="website"
+      />
       <div className="max-w-6xl mx-auto">
         <motion.h1
           className="text-2xl sm:text-4xl font-bold mb-8 text-center"
