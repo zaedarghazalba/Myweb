@@ -4,9 +4,10 @@ import Marquee from 'react-fast-marquee';
 import {
   FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin, FaGithub,
   FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel,
-  FaPython, FaJs, FaReact, FaPalette
+  FaPython, FaJs, FaReact, FaPalette, FaMapMarkerAlt, FaLink, FaUserFriends
 } from 'react-icons/fa';
 import { SiKotlin, SiCanva, SiOpenai, SiGooglegemini, SiAnthropic } from 'react-icons/si';
+import { RiBookOpenLine, RiGitRepositoryLine, RiLayoutMasonryLine, RiBox3Line, RiStarLine } from 'react-icons/ri';
 import profileImg from '../Assets/profile.jpg';
 import GitHubStats from '../Components/GitHubStats';
 import GitHubContributions from '../Components/GitHubContributions';
@@ -14,368 +15,218 @@ import GitHubActivity from '../Components/GitHubActivity';
 import TechStackInteractive from '../Components/TechStackInteractive';
 import GitHubBadges from '../Components/GitHubBadges';
 import PinnedRepos from '../Components/PinnedRepos';
-import ProfileCard from '../Components/ProfileCard';
 import SEO from '../Components/SEO';
 import DecryptedText from '../Components/DecryptedText';
+import ProfileCard from '../Components/ProfileCard';
 
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen text-gray-900 dark:text-white relative">
+    <div className="min-h-screen relative text-[#1f2328] dark:text-[#c9d1d9] font-sans">
       <SEO
-        title="About - Zaedar Ghazalba"
-        description="Zaedar Ghazalba adalah Junior Programmer yang berfokus pada Web Development, Mobile Development, QA Testing, dan Graphic Design. Berpengalaman dengan React, Laravel, Kotlin, dan Python."
-        keywords="Zaedar Ghazalba, About, Junior Programmer Indonesia, Web Developer Indonesia, Mobile Developer, QA Tester, React Developer, Laravel, Kotlin, Python, Portfolio Developer Indonesia"
+        title="Zaedar Ghazalba (zaedarghazalba)"
+        description="Zaedar Ghazalba - Junior Programmer, Web Developer, Mobile Developer, QA Tester."
+        keywords="Zaedar Ghazalba, GitHub Profile, Portfolio, Web Developer"
         type="profile"
       />
 
-      {/* Main Content */}
-      <main className="relative z-10 flex-grow flex flex-col items-center justify-start py-12 px-6">
+      {/* Main Container */}
+      <main className="container mx-auto px-4 py-8 max-w-[1280px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
 
-        {/* H1 Intro */}
-        <DecryptedText
-          text="Hello World, I'm Zaedar Ghazalba"
-          className="text-4xl sm:text-5xl font-bold text-center mb-4"
-        />
-
-        {/* Deskripsi singkat */}
-        <motion.p
-          className="text-lg text-center text-gray-700 dark:text-gray-300 mb-10"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Seorang yang antusias di dunia pemrograman dan senang mempelajari hal baru.
-        </motion.p>
-
-        {/* Konten utama */}
-        <div className="w-full max-w-7xl flex flex-col items-center space-y-10">
-
-          {/* Profile Section - Side by Side */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-
-            {/* Profile Card - Left Side */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+          {/* Left Sidebar: Profile Info */}
+          <div className="md:col-span-4 lg:col-span-3 flex flex-col gap-4">
+            {/* Profile Card (Avatar Replacement) */}
+            <div className="w-full mb-4">
               <ProfileCard
                 image={profileImg}
                 name="Zaedar Ghazalba"
                 username="zaedarghazalba"
                 title="QA Tester • Mobile Developer • Web Developer • Graphic Designer"
-                bio="Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) dan design grafis menggunakan berbagai tools modern karena percaya bahwa kualitas dan estetika adalah bagian penting dari sebuah produk digital."
+                bio="Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) dan design grafis."
               />
-            </motion.div>
+            </div>
 
-            {/* Biodata Card - Right Side */}
-            <motion.div
-              className="w-full bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            {/* Follow Button */}
+            <a
+              href="mailto:zaedaralba11202@gmail.com"
+              className="github-btn w-full justify-center bg-[#f6f8fa] dark:bg-[#21262d] border-[#d0d7de] dark:border-[#30363d] text-[#24292f] dark:text-[#c9d1d9] hover:bg-[#f3f4f6] dark:hover:bg-[#30363d] mb-4"
             >
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6">Biodata</h2>
+              Contact Me
+            </a>
 
-              {/* Full Name */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Nama Lengkap</h3>
-                <p className="text-lg sm:text-xl font-medium">Zaedar Ghazalba</p>
+            {/* Followers / Following */}
+            <div className="flex items-center justify-center md:justify-start gap-1 text-sm text-[#656d76] dark:text-[#8b949e] mb-4">
+              <FaUserFriends className="mr-1" />
+              <span className="font-bold text-[#1f2328] dark:text-[#c9d1d9] hover:text-blue-500 cursor-pointer">128</span> followers
+              <span className="mx-1">·</span>
+              <span className="font-bold text-[#1f2328] dark:text-[#c9d1d9] hover:text-blue-500 cursor-pointer">45</span> following
+            </div>
+
+            {/* Details List */}
+            <div className="flex flex-col gap-2 text-sm text-[#1f2328] dark:text-[#c9d1d9]">
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt className="text-[#656d76] dark:text-[#8b949e] w-4" />
+                <span>Indonesia</span>
               </div>
-
-              {/* Username */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Username</h3>
-                <p className="text-lg sm:text-xl font-medium">@zaedarghazalba</p>
+              <div className="flex items-center gap-2">
+                <FaEnvelope className="text-[#656d76] dark:text-[#8b949e] w-4" />
+                <a href="mailto:zaedaralba11202@gmail.com" className="hover:text-blue-500 hover:underline truncate">zaedaralba11202@gmail.com</a>
               </div>
-
-              {/* Role */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">Role</h3>
-                <p className="text-base sm:text-lg">QA Tester • Mobile Developer • Web Developer • Graphic Designer</p>
+              <div className="flex items-center gap-2">
+                <FaLink className="text-[#656d76] dark:text-[#8b949e] w-4" />
+                <a href="https://zaedarghazalba.github.io" className="hover:text-blue-500 hover:underline truncate">zaedarghazalba.github.io</a>
               </div>
-
-              {/* Social Media */}
-              <div className="mb-4">
-                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-4">Sosial Media</h3>
-                <div className="space-y-3">
-                  <motion.a
-                    href="https://github.com/zaedarghazalba"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
-                    whileHover={{ scale: 1.02, x: 5 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-gray-800 dark:bg-gray-900 flex items-center justify-center text-white">
-                      <FaGithub className="text-xl" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">GitHub</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">@zaedarghazalba</p>
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
-                    whileHover={{ scale: 1.02, x: 5 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-blue-700 flex items-center justify-center text-white">
-                      <FaLinkedin className="text-xl" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">LinkedIn</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Zaedar Ghazalba</p>
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="https://instagram.com/zeedargh"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
-                    whileHover={{ scale: 1.02, x: 5 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-pink-600 flex items-center justify-center text-white">
-                      <FaInstagram className="text-xl" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">Instagram</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">@zeedargh</p>
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="https://wa.me/6281250371835"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
-                    whileHover={{ scale: 1.02, x: 5 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-green-600 flex items-center justify-center text-white">
-                      <FaWhatsapp className="text-xl" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">WhatsApp</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">+62 812-5037-1835</p>
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=zaedaralba11202@gmail.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
-                    whileHover={{ scale: 1.02, x: 5 }}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center text-white">
-                      <FaEnvelope className="text-xl" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">Email</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">zaedaralba11202@gmail.com</p>
-                    </div>
-                  </motion.a>
-                </div>
+              <div className="flex items-center gap-2">
+                <FaGithub className="text-[#656d76] dark:text-[#8b949e] w-4" />
+                <a href="https://github.com/zaedarghazalba" className="hover:text-blue-500 hover:underline">@zaedarghazalba</a>
               </div>
-            </motion.div>
+              <div className="flex items-center gap-2">
+                <FaLinkedin className="text-[#656d76] dark:text-[#8b949e] w-4" />
+                <a href="https://linkedin.com/in/zaedar-ghazalba" className="hover:text-blue-500 hover:underline">Zaedar Ghazalba</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaInstagram className="text-[#656d76] dark:text-[#8b949e] w-4" />
+                <a href="https://instagram.com/zeedargh" className="hover:text-blue-500 hover:underline">@zeedargh</a>
+              </div>
+            </div>
+
+            <div className="border-t border-[#d0d7de] dark:border-[#30363d] my-4"></div>
+
+            {/* Achievements / Badges (Moved to Sidebar) */}
+            <div>
+              <h3 className="font-semibold mb-2 text-sm">Achievements</h3>
+              <div className="flex flex-wrap gap-2">
+                <img src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" alt="Pull Shark" className="w-16 h-16 rounded-full border border-[#d0d7de] dark:border-[#30363d] p-1" title="Pull Shark" />
+                <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" alt="YOLO" className="w-16 h-16 rounded-full border border-[#d0d7de] dark:border-[#30363d] p-1" title="YOLO" />
+              </div>
+            </div>
           </div>
 
-          {/* Keahlian */}
-          <motion.div
-            className="w-full bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-6 shadow-lg"
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.6 }}
-          >
-            <h2 className="text-xl sm:text-2xl font-semibold mb-5 sm:mb-6 text-center">Keahlian</h2>
+          {/* Right Content: Tabs & Main Info */}
+          <div className="md:col-span-8 lg:col-span-9">
 
-            {/* Roles */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5 sm:mb-6">
-              <div className="flex items-center justify-center space-x-2 bg-red-50 dark:bg-red-900/20 p-3 rounded-xl">
-                <FaBug className="text-red-500 text-lg sm:text-xl flex-shrink-0" />
-                <span className="text-sm sm:text-base font-medium">QA Tester</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 bg-green-50 dark:bg-green-900/20 p-3 rounded-xl">
-                <FaMobileAlt className="text-green-500 text-lg sm:text-xl flex-shrink-0" />
-                <span className="text-sm sm:text-base font-medium">Mobile Developer</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-xl">
-                <FaCode className="text-yellow-500 text-lg sm:text-xl flex-shrink-0" />
-                <span className="text-sm sm:text-base font-medium">Web Developer</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 bg-purple-50 dark:bg-purple-900/20 p-3 rounded-xl">
-                <FaPalette className="text-purple-500 text-lg sm:text-xl flex-shrink-0" />
-                <span className="text-sm sm:text-base font-medium">Graphic Designer</span>
-              </div>
+            {/* GitHub Tabs */}
+            <div className="github-tabs overflow-x-auto scrollbar-hide flex mb-6">
+              <button className="github-tab-item active">
+                <RiBookOpenLine className="text-lg" />
+                <span>Overview</span>
+              </button>
             </div>
+            {/* README Section (Custom Profile Content) */}
+            <div className="github-readme">
+              <div className="github-readme-header flex justify-between items-center">
+                <span>zaedarghazalba / README.md</span>
+                <div className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded cursor-pointer">
+                  <FaCode />
+                </div>
+              </div>
+              <div className="github-readme-content prose dark:prose-invert max-w-none">
 
-            <hr className="mb-5 sm:mb-6 border-gray-300 dark:border-gray-600" />
+                {/* Header Intro */}
+                <div className="text-center mb-8">
+                  <DecryptedText
+                    text="Hello World, I'm Zaedar Ghazalba"
+                    className="text-3xl sm:text-4xl font-bold mb-4 border-b-0"
+                  />
+                  <p className="text-lg text-gray-600 dark:text-gray-400">
+                    Seorang yang antusias di dunia pemrograman dan senang mempelajari hal baru.
+                  </p>
+                </div>
 
-            {/* Bahasa & Tools */}
-            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Bahasa & Tools</h3>
-            <div className="mb-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700">
-              <Marquee
-                gradient={false}
-                speed={40}
-                pauseOnHover={true}
-                className="py-2"
-              >
-                {[...Array(3)].map((_, index) => (
-                  <div key={index} className="flex items-center gap-8 mx-4">
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 group-hover:bg-purple-200 dark:group-hover:bg-purple-900/50 transition-colors">
-                        <FaPhp className="text-purple-600 dark:text-purple-400 text-5xl" />
+                {/* Tech Stack Marquee */}
+                <h3 className="text-center font-bold text-xl mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Tech Stack & Tools</h3>
+                <div className="mb-8 relative">
+                  <Marquee gradient={false} speed={40} pauseOnHover={true} className="py-4">
+                    {[...Array(2)].map((_, i) => (
+                      <div key={i} className="flex items-center gap-8 mx-4">
+                        <FaPhp className="text-4xl text-[#777BB4]" title="PHP" />
+                        <FaLaravel className="text-4xl text-[#FF2D20]" title="Laravel" />
+                        <SiKotlin className="text-4xl text-[#7F52FF]" title="Kotlin" />
+                        <FaPython className="text-4xl text-[#3776AB]" title="Python" />
+                        <FaJs className="text-4xl text-[#F7DF1E]" title="JavaScript" />
+                        <FaReact className="text-4xl text-[#61DAFB]" title="React" />
+                        <SiCanva className="text-4xl text-[#00C4CC]" title="Canva" />
+                        <SiOpenai className="text-4xl text-[#10A37F]" title="OpenAI" />
+                        <SiGooglegemini className="text-4xl text-[#8E75B2]" title="Gemini" />
+                        <SiAnthropic className="text-4xl text-[#8E75B2]" title="Anthropic" />
                       </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">PHP</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-red-100 dark:bg-red-900/30 group-hover:bg-red-200 dark:group-hover:bg-red-900/50 transition-colors">
-                        <FaLaravel className="text-red-600 dark:text-red-400 text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Laravel</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-orange-100 dark:bg-orange-900/30 group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors">
-                        <SiKotlin className="text-orange-500 dark:text-orange-400 text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Kotlin</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-                        <FaPython className="text-blue-500 dark:text-blue-400 text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Python</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-900/50 transition-colors">
-                        <FaJs className="text-yellow-500 dark:text-yellow-400 text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">JavaScript</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-900/50 transition-colors">
-                        <FaReact className="text-cyan-500 dark:text-cyan-400 text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">React JS</span>
-                    </div>
+                    ))}
+                  </Marquee>
+                </div>
+
+                {/* Skills Grid */}
+                <h3 className="text-center font-bold text-xl mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Specializations</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 not-prose">
+                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
+                    <FaBug className="text-red-500 text-2xl mb-2" />
+                    <span className="font-semibold text-sm">QA Tester</span>
                   </div>
-                ))}
-              </Marquee>
-            </div>
-
-            <hr className="mb-5 sm:mb-6 border-gray-300 dark:border-gray-600" />
-
-            {/* Design Grafis & AI Tools */}
-            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5 text-center">Design Grafis & AI Tools</h3>
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700">
-              <Marquee
-                gradient={false}
-                speed={40}
-                direction="right"
-                pauseOnHover={true}
-                className="py-2"
-              >
-                {[...Array(4)].map((_, index) => (
-                  <div key={index} className="flex items-center gap-8 mx-4">
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-cyan-50 dark:bg-cyan-900/30 group-hover:bg-cyan-100 dark:group-hover:bg-cyan-900/50 transition-colors">
-                        <SiCanva className="text-[#00C4CC] text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Canva</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 transition-colors">
-                        <SiOpenai className="text-[#10A37F] text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">ChatGPT</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-purple-50 dark:bg-purple-900/30 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50 transition-colors">
-                        <SiGooglegemini className="text-[#8E75B2] text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Gemini</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-300 min-w-[140px] group hover:scale-105">
-                      <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-900/30 group-hover:bg-amber-100 dark:group-hover:bg-amber-900/50 transition-colors">
-                        <SiAnthropic className="text-[#D4A373] text-5xl" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Claude</span>
-                    </div>
+                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
+                    <FaMobileAlt className="text-green-500 text-2xl mb-2" />
+                    <span className="font-semibold text-sm">Mobile Dev</span>
                   </div>
-                ))}
-              </Marquee>
+                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
+                    <FaCode className="text-yellow-500 text-2xl mb-2" />
+                    <span className="font-semibold text-sm">Web Dev</span>
+                  </div>
+                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
+                    <FaPalette className="text-purple-500 text-2xl mb-2" />
+                    <span className="font-semibold text-sm">Designer</span>
+                  </div>
+                </div>
+
+                {/* Interactive Tech Stack */}
+                <div className="not-prose">
+                  <TechStackInteractive />
+                </div>
+
+              </div>
             </div>
-          </motion.div>
 
-          {/* Tech Stack Interactive */}
-          <motion.div
-            className="w-full max-w-6xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9 }}
-          >
-            <TechStackInteractive />
-          </motion.div>
+            {/* Pinned Repositories */}
+            <div className="mb-8">
+              <div className="flex justify-between items-end mb-4">
+                <h2 className="text-[16px] font-semibold text-[#1f2328] dark:text-[#c9d1d9]">Pinned</h2>
+                <a href="#" className="text-xs text-[#0969da] dark:text-[#58a6ff] hover:underline">Customize your pins</a>
+              </div>
+              <PinnedRepos />
+            </div>
 
-          {/* GitHub Badges/Achievements */}
-          <motion.div
-            className="w-full max-w-6xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.0 }}
-          >
-            <GitHubBadges />
-          </motion.div>
+            {/* Contribution Graph */}
+            <div className="mb-8">
+              <div className="flex justify-between items-end mb-4">
+                <h2 className="text-[16px] font-semibold text-[#1f2328] dark:text-[#c9d1d9]">1,234 contributions in the last year</h2>
+                <a href="#" className="text-xs text-[#0969da] dark:text-[#58a6ff] hover:underline">Contribution settings</a>
+              </div>
+              <GitHubContributions username="zaedarghazalba" />
+            </div>
 
-          {/* Pinned Repositories */}
-          <motion.div
-            className="w-full max-w-6xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.1 }}
-          >
-            <PinnedRepos />
-          </motion.div>
+            {/* Activity Timeline */}
+            <div className="mb-8">
+              <h2 className="text-[16px] font-semibold text-[#1f2328] dark:text-[#c9d1d9] mb-4">Contribution activity</h2>
+              <GitHubActivity />
+            </div>
 
-          {/* GitHub Stats Section */}
-          <motion.div
-            className="w-full max-w-6xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.2 }}
-          >
-            <h2 className="text-2xl font-bold mb-6 text-center">GitHub Statistics</h2>
-            <GitHubStats />
-          </motion.div>
+            {/* Stats (Optional placement) */}
+            <div className="mb-8">
+              <GitHubStats />
+            </div>
 
-          {/* GitHub Contributions Calendar */}
-          <motion.div
-            className="w-full max-w-6xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.3 }}
-          >
-            <GitHubContributions username="zaedarghazalba" />
-          </motion.div>
-
-          {/* GitHub Activity Timeline */}
-          <motion.div
-            className="w-full max-w-6xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.4 }}
-          >
-            <GitHubActivity />
-          </motion.div>
+          </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="fixed bottom-0 left-0 w-full text-center py-2 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 z-50">
-        © {new Date().getFullYear()} Zaedar Ghazalba. All rights reserved.
+      <footer className="mt-12 py-8 border-t border-[#d0d7de] dark:border-[#30363d] text-center text-xs text-[#656d76] dark:text-[#8b949e]">
+        <div className="flex justify-center gap-4 mb-2">
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">© {new Date().getFullYear()} Zaedar Ghazalba</a>
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Terms</a>
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Privacy</a>
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Security</a>
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Status</a>
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Docs</a>
+          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Contact</a>
+        </div>
       </footer>
     </div>
   );

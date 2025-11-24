@@ -11,16 +11,9 @@ export default function GitHubContributions({ username = 'zaedarghazalba' }) {
   const githubStreakUrl = `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=dark&hide_border=true`;
 
   return (
-    <motion.div
-      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h3 className="text-xl font-semibold mb-6">GitHub Contributions</h3>
-
+    <div className="w-full">
       {/* Contribution Graph */}
-      <div className="mb-6">
+      <div className="mb-6 border border-[#d0d7de] dark:border-[#30363d] rounded-md p-4 bg-white dark:bg-[#0d1117]">
         {!imageLoaded && !imageError && (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
@@ -45,7 +38,7 @@ export default function GitHubContributions({ username = 'zaedarghazalba' }) {
         <img
           src={contributionImageUrl}
           alt="GitHub Contributions"
-          className={`w-full rounded-lg ${imageLoaded ? 'block' : 'hidden'}`}
+          className={`w-full rounded ${imageLoaded ? 'block' : 'hidden'}`}
           onLoad={() => setImageLoaded(true)}
           onError={() => {
             setImageError(true);
@@ -56,35 +49,23 @@ export default function GitHubContributions({ username = 'zaedarghazalba' }) {
 
       {/* GitHub Stats and Streak */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 overflow-hidden">
+        <div className="bg-white dark:bg-[#0d1117] border border-[#d0d7de] dark:border-[#30363d] rounded-md p-2 overflow-hidden flex justify-center">
           <img
             src={githubStatsUrl}
             alt="GitHub Stats"
-            className="w-full h-auto"
+            className="h-40 object-contain"
             loading="lazy"
           />
         </div>
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 overflow-hidden">
+        <div className="bg-white dark:bg-[#0d1117] border border-[#d0d7de] dark:border-[#30363d] rounded-md p-2 overflow-hidden flex justify-center">
           <img
             src={githubStreakUrl}
             alt="GitHub Streak"
-            className="w-full h-auto"
+            className="h-40 object-contain"
             loading="lazy"
           />
         </div>
       </div>
-
-      {/* Additional Info */}
-      <div className="mt-6 text-center">
-        <a
-          href={`https://github.com/${username}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2"
-        >
-          View Full Profile on GitHub →
-        </a>
-      </div>
-    </motion.div>
+    </div>
   );
 }

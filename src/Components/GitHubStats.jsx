@@ -73,35 +73,6 @@ export default function GitHubStats() {
 
   return (
     <div className="w-full">
-      {/* GitHub Profile Card */}
-      <motion.div
-        className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg mb-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="flex items-center space-x-4 mb-4">
-          <img
-            src={profile.avatar_url}
-            alt={profile.name}
-            className="w-20 h-20 rounded-full border-4 border-gray-200 dark:border-gray-700"
-          />
-          <div>
-            <h2 className="text-2xl font-bold">{profile.name}</h2>
-            <a
-              href={profile.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              @{profile.login}
-            </a>
-          </div>
-        </div>
-        {profile.bio && (
-          <p className="text-gray-700 dark:text-gray-300 mb-4">{profile.bio}</p>
-        )}
-      </motion.div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

@@ -60,14 +60,7 @@ export default function TechStackInteractive() {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
-    <motion.div
-      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h3 className="text-2xl font-bold mb-6 text-center">Tech Stack & Skills</h3>
-
+    <div className="w-full">
       {/* Category Cards */}
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
         {techStack.map((category, index) => {
@@ -78,23 +71,22 @@ export default function TechStackInteractive() {
             <motion.button
               key={index}
               onClick={() => setSelectedCategory(isSelected ? null : index)}
-              className={`relative p-4 sm:p-6 rounded-xl overflow-hidden transition-all ${
-                isSelected
-                  ? 'ring-4 ring-blue-500 shadow-2xl'
-                  : 'shadow-md hover:shadow-xl'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className={`relative p-4 sm:p-6 rounded-xl overflow-hidden transition-all border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#161b22] ${isSelected
+                  ? 'ring-2 ring-blue-500'
+                  : 'hover:bg-gray-100 dark:hover:bg-[#21262d]'
+                }`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               style={{
                 touchAction: 'manipulation',
                 WebkitTapHighlightColor: 'transparent',
               }}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-10`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-5`}></div>
               <div className="relative z-10 flex flex-col items-center">
                 <Icon className="text-3xl sm:text-4xl mb-2" style={{ color: category.skills[0].color }} />
-                <h4 className="text-xs sm:text-sm font-semibold text-center">{category.category}</h4>
-                <span className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <h4 className="text-xs sm:text-sm font-semibold text-center text-[#1f2328] dark:text-[#c9d1d9]">{category.category}</h4>
+                <span className="text-[10px] sm:text-xs text-[#656d76] dark:text-[#8b949e] mt-1">
                   {category.skills.length} skills
                 </span>
               </div>
@@ -111,7 +103,7 @@ export default function TechStackInteractive() {
           exit={{ opacity: 0, height: 0 }}
           className="space-y-3 sm:space-y-4"
         >
-          <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+          <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-[#1f2328] dark:text-[#c9d1d9]">
             {techStack[selectedCategory].category}
           </h4>
 
@@ -135,7 +127,7 @@ export default function TechStackInteractive() {
                       className="text-xl sm:text-2xl flex-shrink-0"
                       style={{ color: skill.color }}
                     />
-                    <span className="font-medium text-sm sm:text-base">{skill.name}</span>
+                    <span className="font-medium text-sm sm:text-base text-[#1f2328] dark:text-[#c9d1d9]">{skill.name}</span>
                   </div>
                   <span className="text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 ml-2">
                     {skill.level}%
@@ -154,17 +146,6 @@ export default function TechStackInteractive() {
                     transition={{ duration: 1, delay: idx * 0.1 + 0.2 }}
                   />
                 </div>
-
-                {/* Hover tooltip - only on desktop */}
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="hidden sm:block absolute -top-8 right-0 bg-gray-800 text-white text-xs px-3 py-1 rounded shadow-lg z-10"
-                  >
-                    Proficiency: {skill.level}%
-                  </motion.div>
-                )}
               </motion.div>
             );
           })}
@@ -172,10 +153,10 @@ export default function TechStackInteractive() {
       )}
 
       {selectedCategory === null && (
-        <p className="text-center text-gray-500 dark:text-gray-400 py-8">
-          Click on a category to view skills
+        <p className="text-center text-[#656d76] dark:text-[#8b949e] py-8 border-t border-gray-200 dark:border-gray-700 mt-4">
+          Select a category above to view detailed skills
         </p>
       )}
-    </motion.div>
+    </div>
   );
 }

@@ -22,7 +22,7 @@ export default function Certifications() {
   ];
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen p-6 sm:p-12">
+    <div className="text-gray-900 dark:text-white min-h-screen p-6 sm:p-12">
       <SEO
         title="Certifications - Zaedar Ghazalba"
         description="Sertifikasi profesional Zaedar Ghazalba termasuk Alibaba Cloud Certified Developers, JavaScript Basic, dan Data Engineering Professional Certification."
