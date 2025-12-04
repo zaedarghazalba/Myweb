@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 
 export default function GitHubContributions({ username = 'zaedarghazalba' }) {
   const [imageLoaded, setImageLoaded] = useState(false);

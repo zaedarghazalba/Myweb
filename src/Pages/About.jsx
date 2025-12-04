@@ -1,232 +1,437 @@
 import '../index.css';
 import { motion } from 'framer-motion';
-import Marquee from 'react-fast-marquee';
+import { useState, useEffect, useRef } from 'react';
 import {
-  FaInstagram, FaWhatsapp, FaEnvelope, FaLinkedin, FaGithub,
-  FaBug, FaMobileAlt, FaCode, FaPhp, FaLaravel,
-  FaPython, FaJs, FaReact, FaPalette, FaMapMarkerAlt, FaLink, FaUserFriends
+  FaInstagram, FaEnvelope, FaLinkedin, FaGithub,
+  FaBug, FaMobileAlt, FaCode, FaPalette, FaMapMarkerAlt, FaDownload,
+  FaBriefcase, FaGraduationCap, FaCalendar, FaChevronDown
 } from 'react-icons/fa';
-import { SiKotlin, SiCanva, SiOpenai, SiGooglegemini, SiAnthropic } from 'react-icons/si';
-import { RiBookOpenLine, RiGitRepositoryLine, RiLayoutMasonryLine, RiBox3Line, RiStarLine } from 'react-icons/ri';
-import profileImg from '../Assets/profile.jpg';
-import GitHubStats from '../Components/GitHubStats';
-import GitHubContributions from '../Components/GitHubContributions';
-import GitHubActivity from '../Components/GitHubActivity';
-import TechStackInteractive from '../Components/TechStackInteractive';
-import GitHubBadges from '../Components/GitHubBadges';
-import PinnedRepos from '../Components/PinnedRepos';
 import SEO from '../Components/SEO';
-import DecryptedText from '../Components/DecryptedText';
-import ProfileCard from '../Components/ProfileCard';
+import TechStackInteractive from '../Components/TechStackInteractive';
 
 export default function About() {
+  const [showCVDropdown, setShowCVDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowCVDropdown(false);
+      }
+    }
+
+    if (showCVDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showCVDropdown]);
+  const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const skills = [
+    { icon: FaBug, label: 'QA Testing', color: 'text-gray-900 dark:text-white' },
+    { icon: FaMobileAlt, label: 'Mobile Dev', color: 'text-gray-900 dark:text-white' },
+    { icon: FaCode, label: 'Web Dev', color: 'text-gray-900 dark:text-white' },
+    { icon: FaPalette, label: 'Design', color: 'text-gray-900 dark:text-white' },
+  ];
+
+  const experiences = [
+    {
+      title: 'Junior Web Developer',
+      company: 'Freelance',
+      period: '2023 - Present',
+      description: 'Developing web applications using React, Laravel, and modern web technologies.',
+      achievements: [
+        'Built responsive web applications with React and Tailwind CSS',
+        'Implemented REST APIs using Laravel',
+        'Collaborated with clients to deliver custom solutions'
+      ]
+    },
+    {
+      title: 'Mobile App Developer',
+      company: 'Personal Projects',
+      period: '2022 - 2023',
+      description: 'Created mobile applications using Kotlin for Android platform.',
+      achievements: [
+        'Developed native Android applications',
+        'Implemented clean architecture patterns',
+        'Published apps with positive user feedback'
+      ]
+    }
+  ];
+
+  const education = [
+    {
+      degree: 'Bachelor of Informatics',
+      institution: 'Yogyakarta University of Technology',
+      period: 'September 2021 - August 2025',
+      gpa: '3.76 / 4.00',
+      description: 'Focused on web and mobile application development, database management, and software engineering with 144 credits completed.'
+    },
+    {
+      degree: 'Senior High School - MIPA',
+      institution: 'Kulon Progo Abu Bakar Boarding School',
+      period: 'July 2018 - May 2021',
+      description: 'Focused on Mathematics and Natural Sciences (MIPA) with boarding school education.'
+    }
+  ];
+
   return (
-    <div className="min-h-screen relative text-[#1f2328] dark:text-[#c9d1d9] font-sans">
+    <div className="min-h-screen">
       <SEO
-        title="Zaedar Ghazalba (zaedarghazalba)"
-        description="Zaedar Ghazalba - Junior Programmer, Web Developer, Mobile Developer, QA Tester."
-        keywords="Zaedar Ghazalba, GitHub Profile, Portfolio, Web Developer"
+        title="Zaedar Ghazalba - Portfolio"
+        description="Junior Programmer specializing in Web Development, Mobile Development, and QA Testing."
+        keywords="Zaedar Ghazalba, Web Developer, Mobile Developer, QA Tester"
         type="profile"
       />
 
-      {/* Main Container */}
-      <main className="container mx-auto px-4 py-8 max-w-[1280px]">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      {/* Hero Section - Framer Style: Large, Bold, Minimal */}
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="py-24 md:py-32 lg:py-40"
+      >
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Large Bold Heading - Framer Style */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight leading-none">
+            Zaedar Ghazalba
+          </h1>
 
-          {/* Left Sidebar: Profile Info */}
-          <div className="md:col-span-4 lg:col-span-3 flex flex-col gap-4">
-            {/* Profile Card (Avatar Replacement) */}
-            <div className="w-full mb-4">
-              <ProfileCard
-                image={profileImg}
-                name="Zaedar Ghazalba"
-                username="zaedarghazalba"
-                title="QA Tester • Mobile Developer • Web Developer • Graphic Designer"
-                bio="Saya Zaedar Ghazalba, seorang junior programmer yang antusias dan terus berproses dalam dunia teknologi. Memiliki semangat belajar yang tinggi dan dedikasi dalam mengembangkan kemampuan, saya cukup berpengalaman dalam membangun aplikasi mobile dan web. Selain itu, saya juga memiliki ketertarikan besar dalam bidang pengujian perangkat lunak (QA Testing) dan design grafis."
-              />
-            </div>
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-400 mb-8 font-light max-w-3xl mx-auto leading-relaxed">
+            Junior programmer yang antusias dalam dunia teknologi
+          </p>
 
-            {/* Follow Button */}
+          {/* Description */}
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Berpengalaman dalam membangun aplikasi mobile dan web, dengan ketertarikan
+            besar dalam QA Testing dan design grafis.
+          </p>
+
+          {/* CTA Buttons - Clean & Minimal */}
+          <div className="flex flex-wrap gap-4 justify-center">
             <a
               href="mailto:zaedaralba11202@gmail.com"
-              className="github-btn w-full justify-center bg-[#f6f8fa] dark:bg-[#21262d] border-[#d0d7de] dark:border-[#30363d] text-[#24292f] dark:text-[#c9d1d9] hover:bg-[#f3f4f6] dark:hover:bg-[#30363d] mb-4"
+              className="framer-btn framer-btn-primary"
             >
+              <FaEnvelope size={18} />
               Contact Me
             </a>
 
-            {/* Followers / Following */}
-            <div className="flex items-center justify-center md:justify-start gap-1 text-sm text-[#656d76] dark:text-[#8b949e] mb-4">
-              <FaUserFriends className="mr-1" />
-              <span className="font-bold text-[#1f2328] dark:text-[#c9d1d9] hover:text-blue-500 cursor-pointer">128</span> followers
-              <span className="mx-1">·</span>
-              <span className="font-bold text-[#1f2328] dark:text-[#c9d1d9] hover:text-blue-500 cursor-pointer">45</span> following
-            </div>
-
-            {/* Details List */}
-            <div className="flex flex-col gap-2 text-sm text-[#1f2328] dark:text-[#c9d1d9]">
-              <div className="flex items-center gap-2">
-                <FaMapMarkerAlt className="text-[#656d76] dark:text-[#8b949e] w-4" />
-                <span>Indonesia</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaEnvelope className="text-[#656d76] dark:text-[#8b949e] w-4" />
-                <a href="mailto:zaedaralba11202@gmail.com" className="hover:text-blue-500 hover:underline truncate">zaedaralba11202@gmail.com</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaLink className="text-[#656d76] dark:text-[#8b949e] w-4" />
-                <a href="https://zaedarghazalba.github.io" className="hover:text-blue-500 hover:underline truncate">zaedarghazalba.github.io</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaGithub className="text-[#656d76] dark:text-[#8b949e] w-4" />
-                <a href="https://github.com/zaedarghazalba" className="hover:text-blue-500 hover:underline">@zaedarghazalba</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaLinkedin className="text-[#656d76] dark:text-[#8b949e] w-4" />
-                <a href="https://linkedin.com/in/zaedar-ghazalba" className="hover:text-blue-500 hover:underline">Zaedar Ghazalba</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaInstagram className="text-[#656d76] dark:text-[#8b949e] w-4" />
-                <a href="https://instagram.com/zeedargh" className="hover:text-blue-500 hover:underline">@zeedargh</a>
-              </div>
-            </div>
-
-            <div className="border-t border-[#d0d7de] dark:border-[#30363d] my-4"></div>
-
-            {/* Achievements / Badges (Moved to Sidebar) */}
-            <div>
-              <h3 className="font-semibold mb-2 text-sm">Achievements</h3>
-              <div className="flex flex-wrap gap-2">
-                <img src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" alt="Pull Shark" className="w-16 h-16 rounded-full border border-[#d0d7de] dark:border-[#30363d] p-1" title="Pull Shark" />
-                <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" alt="YOLO" className="w-16 h-16 rounded-full border border-[#d0d7de] dark:border-[#30363d] p-1" title="YOLO" />
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content: Tabs & Main Info */}
-          <div className="md:col-span-8 lg:col-span-9">
-
-            {/* GitHub Tabs */}
-            <div className="github-tabs overflow-x-auto scrollbar-hide flex mb-6">
-              <button className="github-tab-item active">
-                <RiBookOpenLine className="text-lg" />
-                <span>Overview</span>
+            {/* CV Download Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setShowCVDropdown(!showCVDropdown)}
+                className="framer-btn framer-btn-secondary flex items-center gap-2"
+              >
+                <FaDownload size={18} />
+                Download CV
+                <FaChevronDown
+                  size={14}
+                  className={`transition-transform duration-200 ${showCVDropdown ? 'rotate-180' : ''}`}
+                />
               </button>
-            </div>
-            {/* README Section (Custom Profile Content) */}
-            <div className="github-readme">
-              <div className="github-readme-header flex justify-between items-center">
-                <span>zaedarghazalba / README.md</span>
-                <div className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded cursor-pointer">
-                  <FaCode />
-                </div>
-              </div>
-              <div className="github-readme-content prose dark:prose-invert max-w-none">
 
-                {/* Header Intro */}
-                <div className="text-center mb-8">
-                  <DecryptedText
-                    text="Hello World, I'm Zaedar Ghazalba"
-                    className="text-3xl sm:text-4xl font-bold mb-4 border-b-0"
-                  />
-                  <p className="text-lg text-gray-600 dark:text-gray-400">
-                    Seorang yang antusias di dunia pemrograman dan senang mempelajari hal baru.
-                  </p>
-                </div>
-
-                {/* Tech Stack Marquee */}
-                <h3 className="text-center font-bold text-xl mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Tech Stack & Tools</h3>
-                <div className="mb-8 relative">
-                  <Marquee gradient={false} speed={40} pauseOnHover={true} className="py-4">
-                    {[...Array(2)].map((_, i) => (
-                      <div key={i} className="flex items-center gap-8 mx-4">
-                        <FaPhp className="text-4xl text-[#777BB4]" title="PHP" />
-                        <FaLaravel className="text-4xl text-[#FF2D20]" title="Laravel" />
-                        <SiKotlin className="text-4xl text-[#7F52FF]" title="Kotlin" />
-                        <FaPython className="text-4xl text-[#3776AB]" title="Python" />
-                        <FaJs className="text-4xl text-[#F7DF1E]" title="JavaScript" />
-                        <FaReact className="text-4xl text-[#61DAFB]" title="React" />
-                        <SiCanva className="text-4xl text-[#00C4CC]" title="Canva" />
-                        <SiOpenai className="text-4xl text-[#10A37F]" title="OpenAI" />
-                        <SiGooglegemini className="text-4xl text-[#8E75B2]" title="Gemini" />
-                        <SiAnthropic className="text-4xl text-[#8E75B2]" title="Anthropic" />
-                      </div>
-                    ))}
-                  </Marquee>
-                </div>
-
-                {/* Skills Grid */}
-                <h3 className="text-center font-bold text-xl mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Specializations</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 not-prose">
-                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
-                    <FaBug className="text-red-500 text-2xl mb-2" />
-                    <span className="font-semibold text-sm">QA Tester</span>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
-                    <FaMobileAlt className="text-green-500 text-2xl mb-2" />
-                    <span className="font-semibold text-sm">Mobile Dev</span>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
-                    <FaCode className="text-yellow-500 text-2xl mb-2" />
-                    <span className="font-semibold text-sm">Web Dev</span>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-gray-700">
-                    <FaPalette className="text-purple-500 text-2xl mb-2" />
-                    <span className="font-semibold text-sm">Designer</span>
-                  </div>
-                </div>
-
-                {/* Interactive Tech Stack */}
-                <div className="not-prose">
-                  <TechStackInteractive />
-                </div>
-
-              </div>
+              {showCVDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute top-full mt-2 left-0 w-full min-w-[200px] bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg overflow-hidden z-10"
+                >
+                  <a
+                    href="/cv-programmer.pdf"
+                    download="Zaedar-CV-Programmer.pdf"
+                    className="block px-4 py-3 text-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                    onClick={() => setShowCVDropdown(false)}
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaCode size={16} />
+                      <span className="font-medium">CV Programmer</span>
+                    </div>
+                  </a>
+                  <div className="border-t border-gray-200 dark:border-gray-800"></div>
+                  <a
+                    href="/cv-designer.pdf"
+                    download="Zaedar-CV-Designer.pdf"
+                    className="block px-4 py-3 text-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                    onClick={() => setShowCVDropdown(false)}
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaPalette size={16} />
+                      <span className="font-medium">CV Designer</span>
+                    </div>
+                  </a>
+                </motion.div>
+              )}
             </div>
 
-            {/* Pinned Repositories */}
-            <div className="mb-8">
-              <div className="flex justify-between items-end mb-4">
-                <h2 className="text-[16px] font-semibold text-[#1f2328] dark:text-[#c9d1d9]">Pinned</h2>
-                <a href="#" className="text-xs text-[#0969da] dark:text-[#58a6ff] hover:underline">Customize your pins</a>
-              </div>
-              <PinnedRepos />
-            </div>
-
-            {/* Contribution Graph */}
-            <div className="mb-8">
-              <div className="flex justify-between items-end mb-4">
-                <h2 className="text-[16px] font-semibold text-[#1f2328] dark:text-[#c9d1d9]">1,234 contributions in the last year</h2>
-                <a href="#" className="text-xs text-[#0969da] dark:text-[#58a6ff] hover:underline">Contribution settings</a>
-              </div>
-              <GitHubContributions username="zaedarghazalba" />
-            </div>
-
-            {/* Activity Timeline */}
-            <div className="mb-8">
-              <h2 className="text-[16px] font-semibold text-[#1f2328] dark:text-[#c9d1d9] mb-4">Contribution activity</h2>
-              <GitHubActivity />
-            </div>
-
-            {/* Stats (Optional placement) */}
-            <div className="mb-8">
-              <GitHubStats />
-            </div>
-
+            <a
+              href="https://github.com/zaedarghazalba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="framer-btn framer-btn-secondary"
+            >
+              <FaGithub size={18} />
+              View GitHub
+            </a>
           </div>
         </div>
-      </main>
+      </motion.section>
 
-      {/* Footer */}
-      <footer className="mt-12 py-8 border-t border-[#d0d7de] dark:border-[#30363d] text-center text-xs text-[#656d76] dark:text-[#8b949e]">
-        <div className="flex justify-center gap-4 mb-2">
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">© {new Date().getFullYear()} Zaedar Ghazalba</a>
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Terms</a>
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Privacy</a>
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Security</a>
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Status</a>
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Docs</a>
-          <a href="#" className="hover:text-[#0969da] dark:hover:text-[#58a6ff] hover:underline">Contact</a>
+      {/* Divider */}
+      <div className="framer-divider"></div>
+
+      {/* Skills Section - Ultra Minimal */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+            Specializations
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {skills.map((skill, index) => {
+              const Icon = skill.icon;
+              return (
+                <motion.div
+                  key={skill.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.1 * index }}
+                  className="framer-card text-center group"
+                >
+                  <Icon className={`${skill.color} text-4xl mx-auto mb-4`} />
+                  <p className="text-sm md:text-base font-medium text-gray-900 dark:text-white">
+                    {skill.label}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
+      </motion.section>
+
+      {/* Divider */}
+      <div className="framer-divider"></div>
+
+      {/* Tech Stack - Interactive */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+            Tech Stack
+          </h2>
+          <TechStackInteractive />
+        </div>
+      </motion.section>
+
+      {/* Divider */}
+      <div className="framer-divider"></div>
+
+      {/* Work Experience */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+            Work Experience
+          </h2>
+
+          <div className="space-y-8">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+                className="framer-card"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-900 flex items-center justify-center flex-shrink-0">
+                    <FaBriefcase className="text-xl text-gray-900 dark:text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {exp.title}
+                    </h3>
+                    <p className="text-base text-gray-600 dark:text-gray-400 mb-2">
+                      {exp.company}
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-3">
+                      <FaCalendar size={14} />
+                      <span>{exp.period}</span>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400 mb-3">
+                      {exp.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {exp.achievements.map((achievement, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400 mt-1">•</span>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Divider */}
+      <div className="framer-divider"></div>
+
+      {/* Education */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+            Education
+          </h2>
+
+          <div className="space-y-8">
+            {education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+                className="framer-card"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-900 flex items-center justify-center flex-shrink-0">
+                    <FaGraduationCap className="text-xl text-gray-900 dark:text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-base text-gray-600 dark:text-gray-400 mb-2">
+                      {edu.institution}
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-3">
+                      <FaCalendar size={14} />
+                      <span>{edu.period}</span>
+                    </div>
+                    {edu.gpa && (
+                      <div className="mb-3">
+                        <span className="inline-block px-3 py-1 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white text-sm font-medium rounded-full">
+                          GPA: {edu.gpa}
+                        </span>
+                      </div>
+                    )}
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {edu.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Divider */}
+      <div className="framer-divider"></div>
+
+      {/* Contact Section - Clean CTA */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+            Let's Connect
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 leading-relaxed">
+            Interested in working together? Feel free to reach out.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <a
+              href="https://github.com/zaedarghazalba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="framer-btn framer-btn-secondary"
+            >
+              <FaGithub size={18} />
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/zaedar-ghazalba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="framer-btn framer-btn-secondary"
+            >
+              <FaLinkedin size={18} />
+              LinkedIn
+            </a>
+            <a
+              href="https://instagram.com/zeedargh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="framer-btn framer-btn-secondary"
+            >
+              <FaInstagram size={18} />
+              Instagram
+            </a>
+            <a
+              href="mailto:zaedaralba11202@gmail.com"
+              className="framer-btn framer-btn-secondary"
+            >
+              <FaEnvelope size={18} />
+              Email
+            </a>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+            <FaMapMarkerAlt />
+            <span>Indonesia</span>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Footer - Minimal */}
+      <footer className="text-center text-sm text-gray-400 dark:text-gray-600 py-12 border-t border-gray-200 dark:border-gray-800">
+        <p>© {new Date().getFullYear()} Zaedar Ghazalba</p>
       </footer>
     </div>
   );

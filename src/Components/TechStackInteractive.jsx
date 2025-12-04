@@ -57,7 +57,6 @@ const techStack = [
 
 export default function TechStackInteractive() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
     <div className="w-full">
@@ -109,7 +108,6 @@ export default function TechStackInteractive() {
 
           {techStack[selectedCategory].skills.map((skill, idx) => {
             const SkillIcon = skill.icon;
-            const isHovered = hoveredSkill === `${selectedCategory}-${idx}`;
 
             return (
               <motion.div
@@ -118,8 +116,6 @@ export default function TechStackInteractive() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                onMouseEnter={() => setHoveredSkill(`${selectedCategory}-${idx}`)}
-                onMouseLeave={() => setHoveredSkill(null)}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">

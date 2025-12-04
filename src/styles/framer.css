@@ -1,0 +1,389 @@
+/* ===================================
+   FRAMER.COM INSPIRED DESIGN SYSTEM
+   Ultra Clean, Minimal, Professional
+   ================================== */
+
+/* --- FRAMER BUTTON STYLES --- */
+.framer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 8px;
+  text-decoration: none;
+}
+
+.framer-btn-sm {
+  padding: 8px 16px;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.framer-btn-primary {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+.dark .framer-btn-primary {
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+}
+
+.framer-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dark .framer-btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.framer-btn-secondary {
+  background: transparent;
+  color: #000;
+  border: 1px solid #e5e5e5;
+}
+
+.dark .framer-btn-secondary {
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.framer-btn-secondary:hover {
+  background: #fafafa;
+  border-color: #d4d4d4;
+  transform: translateY(-1px);
+}
+
+.dark .framer-btn-secondary:hover {
+  background: #1a1a1a;
+  border-color: #404040;
+}
+
+/* --- FRAMER CARD STYLES --- */
+.framer-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .framer-card {
+  background: #0a0a0a;
+  border: 1px solid #262626;
+}
+
+.framer-card:hover {
+  transform: translateY(-2px);
+  border-color: #d4d4d4;
+}
+
+.dark .framer-card:hover {
+  border-color: #404040;
+}
+
+/* --- FRAMER DIVIDER --- */
+.framer-divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.dark .framer-divider {
+  background: #262626;
+}
+
+/* --- FRAMER SECTION STYLES --- */
+.framer-section {
+  padding: 120px 0;
+}
+
+@media (max-width: 768px) {
+  .framer-section {
+    padding: 80px 0;
+  }
+}
+
+/* --- FRAMER TYPOGRAPHY --- */
+.framer-heading-1 {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #000;
+}
+
+.dark .framer-heading-1 {
+  color: #fff;
+}
+
+.framer-heading-2 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #000;
+}
+
+.dark .framer-heading-2 {
+  color: #fff;
+}
+
+.framer-heading-3 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.dark .framer-heading-3 {
+  color: #fff;
+}
+
+.framer-body {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #737373;
+}
+
+.dark .framer-body {
+  color: #a3a3a3;
+}
+
+.framer-body-large {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #737373;
+}
+
+.dark .framer-body-large {
+  color: #a3a3a3;
+}
+
+/* --- RESPONSIVE TYPOGRAPHY --- */
+@media (max-width: 768px) {
+  .framer-heading-1 {
+    font-size: 48px;
+  }
+
+  .framer-heading-2 {
+    font-size: 36px;
+  }
+
+  .framer-heading-3 {
+    font-size: 28px;
+  }
+
+  .framer-body-large {
+    font-size: 18px;
+  }
+
+  .framer-body {
+    font-size: 16px;
+  }
+}
+
+/* --- FRAMER ANIMATIONS --- */
+@keyframes framerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.framer-fade-in {
+  animation: framerFadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- FRAMER SMOOTH SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 6px;
+  border: 3px solid #fff;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-color: #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+
+/* --- FRAMER FOCUS STATES --- */
+*:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.dark *:focus-visible {
+  outline-color: #fff;
+}
+
+/* --- FRAMER SMOOTH TRANSITIONS --- */
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- FRAMER MINIMAL SHADOWS --- */
+.framer-shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.framer-shadow-md {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.framer-shadow-lg {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dark .framer-shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dark .framer-shadow-md {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dark .framer-shadow-lg {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* --- FRAMER BADGE --- */
+.framer-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 8px;
+  white-space: nowrap;
+  background: #f5f5f5;
+  color: #000;
+  border: 1px solid #e5e5e5;
+}
+
+.dark .framer-badge {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #262626;
+}
+
+/* --- FRAMER LINK --- */
+.framer-link {
+  color: #000;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.dark .framer-link {
+  color: #fff;
+}
+
+.framer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.2s ease;
+}
+
+.framer-link:hover::after {
+  width: 100%;
+}
+
+.framer-link:hover {
+  color: #525252;
+}
+
+.dark .framer-link:hover {
+  color: #d4d4d4;
+}
+
+/* --- FRAMER GRID --- */
+.framer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* --- REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- FRAMER BACKGROUND --- */
+.framer-bg {
+  background: #fff;
+  color: #000;
+}
+
+.dark .framer-bg {
+  background: #000;
+  color: #fff;
+}
+
+/* --- FRAMER CONTAINER --- */
+.framer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .framer-container {
+    padding: 0 16px;
+  }
+}

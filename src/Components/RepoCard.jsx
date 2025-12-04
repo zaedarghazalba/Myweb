@@ -57,12 +57,12 @@ export default function RepoCard({ repo, index = 0 }) {
       >
         {/* Front Side */}
         <motion.div
-          className="absolute inset-0 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 shadow-lg border border-gray-200 dark:border-gray-700"
+          className="absolute inset-0 bg-white dark:bg-gray-900 rounded-xl p-4 md:p-5 border border-gray-200 dark:border-gray-800"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
           }}
-          whileHover={{ scale: 1.02, y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+          whileHover={{ scale: 1.02, y: -5 }}
         >
           <div className="flex flex-col h-full">
             {/* Header */}
@@ -71,7 +71,7 @@ export default function RepoCard({ repo, index = 0 }) {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0"
+                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white hover:underline flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0"
                 onClick={(e) => e.stopPropagation()}
               >
                 <span className="truncate">{repo.name}</span>
@@ -79,7 +79,7 @@ export default function RepoCard({ repo, index = 0 }) {
               </a>
               <button
                 onClick={() => setIsFlipped(true)}
-                className="ml-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex-shrink-0"
+                className="ml-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
                 title="View details"
               >
                 <FaInfoCircle className="text-gray-500 dark:text-gray-400" />
@@ -101,13 +101,13 @@ export default function RepoCard({ repo, index = 0 }) {
               )}
               {repo.stargazers_count > 0 && (
                 <div className="flex items-center gap-1">
-                  <FaStar className="text-yellow-500" />
+                  <FaStar className="text-gray-900 dark:text-white" />
                   <span>{repo.stargazers_count}</span>
                 </div>
               )}
               {repo.forks_count > 0 && (
                 <div className="flex items-center gap-1">
-                  <FaCodeBranch className="text-blue-500" />
+                  <FaCodeBranch className="text-gray-900 dark:text-white" />
                   <span>{repo.forks_count}</span>
                 </div>
               )}
@@ -122,19 +122,19 @@ export default function RepoCard({ repo, index = 0 }) {
 
         {/* Back Side */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 shadow-lg"
+          className="absolute inset-0 bg-gray-900 dark:bg-white rounded-xl p-4 md:p-5 border border-gray-800 dark:border-gray-200"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
         >
-          <div className="flex flex-col h-full text-white">
+          <div className="flex flex-col h-full text-white dark:text-black">
             <div className="flex justify-between items-start mb-3 sm:mb-4">
               <h3 className="text-base sm:text-lg font-bold truncate pr-2">{repo.name}</h3>
               <button
                 onClick={() => setIsFlipped(false)}
-                className="p-2 rounded-lg hover:bg-white/20 transition-colors"
+                className="p-2 rounded-lg hover:bg-white/10 dark:hover:bg-black/10 transition-colors"
                 title="Back to front"
               >
                 ✕
@@ -143,28 +143,28 @@ export default function RepoCard({ repo, index = 0 }) {
 
             <div className="flex-grow space-y-2 sm:space-y-3 text-xs sm:text-sm">
               {/* Repository Stats */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
-                  <FaStar className="text-yellow-300" />
+                  <FaStar />
                   Repository Stats
                 </h4>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>
-                    <div className="text-white/70">Stars</div>
+                    <div className="text-white/70 dark:text-black/70">Stars</div>
                     <div className="font-semibold">{repo.stargazers_count}</div>
                   </div>
                   <div>
-                    <div className="text-white/70">Forks</div>
+                    <div className="text-white/70 dark:text-black/70">Forks</div>
                     <div className="font-semibold">{repo.forks_count}</div>
                   </div>
                   {repo.watchers_count > 0 && (
                     <>
                       <div>
-                        <div className="text-white/70">Watchers</div>
+                        <div className="text-white/70 dark:text-black/70">Watchers</div>
                         <div className="font-semibold">{repo.watchers_count}</div>
                       </div>
                       <div>
-                        <div className="text-white/70">Issues</div>
+                        <div className="text-white/70 dark:text-black/70">Issues</div>
                         <div className="font-semibold">{repo.open_issues_count || 0}</div>
                       </div>
                     </>
@@ -174,13 +174,13 @@ export default function RepoCard({ repo, index = 0 }) {
 
               {/* Topics */}
               {repo.topics && repo.topics.length > 0 && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-lg p-2 sm:p-3">
                   <h4 className="font-semibold mb-1.5 sm:mb-2 text-xs sm:text-sm">Topics</h4>
                   <div className="flex flex-wrap gap-1">
                     {repo.topics.slice(0, 5).map((topic) => (
                       <span
                         key={topic}
-                        className="px-2 py-1 text-xs bg-white/20 rounded-full"
+                        className="px-2 py-1 text-xs bg-white/20 dark:bg-black/20 rounded-full"
                       >
                         {topic}
                       </span>
@@ -191,7 +191,7 @@ export default function RepoCard({ repo, index = 0 }) {
 
               {/* License */}
               {repo.license && (
-                <div className="text-xs text-white/80">
+                <div className="text-xs text-white/80 dark:text-black/80">
                   License: {repo.license.name}
                 </div>
               )}
@@ -202,7 +202,7 @@ export default function RepoCard({ repo, index = 0 }) {
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 sm:mt-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg py-2 px-3 sm:px-4 text-center font-semibold transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
+              className="mt-2 sm:mt-3 bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 backdrop-blur-sm rounded-lg py-2 px-3 sm:px-4 text-center font-semibold transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
             >
               <FaExternalLinkAlt className="text-xs" />
               View on GitHub
