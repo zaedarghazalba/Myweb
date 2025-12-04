@@ -40,25 +40,29 @@ export default function About() {
 
   const experiences = [
     {
-      title: 'Junior Web Developer',
-      company: 'Freelance',
-      period: '2023 - Present',
-      description: 'Developing web applications using React, Laravel, and modern web technologies.',
+      title: 'WordPress Developer',
+      company: 'Akseleratech',
+      period: 'July 2025 - Present',
+      description: 'Developing and maintaining company website using WordPress with focus on performance optimization and modern web technologies.',
       achievements: [
-        'Built responsive web applications with React and Tailwind CSS',
-        'Implemented REST APIs using Laravel',
-        'Collaborated with clients to deliver custom solutions'
+        'Develop and maintain company website using WordPress',
+        'Migrate multiple pages from WordPress to Next.js to improve performance and stability',
+        'Build PWA (Progressive Web App)-based registration page for faster, more responsive, and offline-capable experience',
+        'Collaborate with design and backend teams to ensure optimal integration',
+        'Perform SEO optimization using WordPress SEO plugins (Yoast/RankMath) to improve website visibility'
       ]
     },
     {
-      title: 'Mobile App Developer',
-      company: 'Personal Projects',
-      period: '2022 - 2023',
-      description: 'Created mobile applications using Kotlin for Android platform.',
+      title: 'Mobile & Web Developer',
+      company: 'Freelance - Yogyakarta',
+      period: 'June 2023 - Present',
+      description: 'Developing web and mobile applications using Laravel and Kotlin, with focus on API integration and responsive UI/UX.',
       achievements: [
-        'Developed native Android applications',
-        'Implemented clean architecture patterns',
-        'Published apps with positive user feedback'
+        'Developed clinic mobile application and web with queue feature',
+        'Created Dukcapil mobile project with queue base and queue feature',
+        'Built Posyandu mobile project with queue feature',
+        'Implemented REST APIs to connect web and mobile applications',
+        'Designed responsive and user-friendly interfaces'
       ]
     }
   ];

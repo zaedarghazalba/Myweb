@@ -6,7 +6,16 @@
       "Bash(npx shadcn:*)",
       "Bash(npm install:*)",
       "Bash(git commit --amend -m \"$(cat <<''EOF''\nRemove sidebar and use horizontal navbar layout\n\nMenghapus sidebar dan beralih ke navbar horizontal untuk semua ukuran layar. Perubahan termasuk:\n- Menghapus file NavbarSidebar.jsx yang tidak terpakai\n- Mengubah Layout.jsx untuk menggunakan navbar horizontal fixed di atas\n- Navbar sekarang responsive (icon saja di mobile, icon + teks di desktop)\n- Layout lebih luas dengan container max-w-7xl\n- Menambahkan design graphics portfolio images\nEOF\n)\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx claude-code-templates@latest --agent=development-team/frontend-developer --yes)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout /t 3 /nobreak)",
+      "Bash(dir:*)",
+      "Bash(timeout /t 10)",
+      "Bash(NUL)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
