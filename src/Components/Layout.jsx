@@ -12,12 +12,8 @@ export default function Layout({ children }) {
     { to: "/portfolio", icon: FolderKanban, label: "Portfolio" },
     { to: "/projects", icon: Rocket, label: "Projects" },
     { to: "/certifications", icon: BadgeCheck, label: "Certifications" },
+    { to: "/dashboard", icon: Lock, label: "Dashboard" },
   ];
-
-  // Add Dashboard link if authenticated
-  if (isAuthenticated) {
-    navItems.push({ to: "/dashboard", icon: Lock, label: "Dashboard" });
-  }
 
   return (
     <div className="flex flex-col min-h-screen">

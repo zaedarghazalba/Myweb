@@ -15,7 +15,12 @@
       "Bash(NUL)",
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(find:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(taskkill:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
