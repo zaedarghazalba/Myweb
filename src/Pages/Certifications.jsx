@@ -1,15 +1,8 @@
 import '../index.css';
 import { motion } from 'framer-motion';
-import alibabaImg from '../Assets/alibaba.png';
-import javascriptImg from '../Assets/javascript.png';
-import dataengImg from '../Assets/dataeng.png';
-import qaTestTechniquePdf from '../Assets/4CRM1mH950gKldWv9XuEJ7XpiDH3-UkCe9CHOQRh9hIbzWwAr.pdf';
-import testPlanningPdf from '../Assets/4CRM1mH950gKldWv9XuEJ7XpiDH3-NSPddL0aolkbl0SgX7SB.pdf';
-import testOrganizationPdf from '../Assets/4CRM1mH950gKldWv9XuEJ7XpiDH3-RhOjNGROYLxIbCtQwiZ0.pdf';
-import testScenarioPdf from '../Assets/Tcase dan BDD.pdf';
-import qaseIoPdf from '../Assets/qase io.pdf';
 import { FaAward, FaFilePdf, FaExternalLinkAlt } from 'react-icons/fa';
 import SEO from '../Components/SEO';
+import { useCertifications } from '../hooks/useCertifications';
 
 export default function Certifications() {
   const fadeIn = {
@@ -17,69 +10,8 @@ export default function Certifications() {
     visible: { opacity: 1, y: 0 }
   };
 
-  const certs = [
-    {
-      name: "QA Test Technique - Skill Specialization",
-      type: "pdf",
-      pdfUrl: qaTestTechniquePdf,
-      issuer: "MySkill",
-      year: "2025",
-      description: "Software Quality Assurance - 5 Courses Completed"
-    },
-    {
-      name: "Manage Test dengan Qase.io",
-      type: "pdf",
-      pdfUrl: qaseIoPdf,
-      issuer: "MySkill",
-      year: "2025",
-      description: "QA Test Activity"
-    },
-    {
-      name: "Test Scenario & Test Case",
-      type: "pdf",
-      pdfUrl: testScenarioPdf,
-      issuer: "MySkill",
-      year: "2025",
-      description: "QA Test Activity"
-    },
-    {
-      name: "Test Organization",
-      type: "pdf",
-      pdfUrl: testOrganizationPdf,
-      issuer: "MySkill",
-      year: "2025",
-      description: "QA Test Activity"
-    },
-    {
-      name: "Test Planning",
-      type: "pdf",
-      pdfUrl: testPlanningPdf,
-      issuer: "MySkill",
-      year: "2025",
-      description: "QA Test Activity"
-    },
-    {
-      name: "Alibaba Cloud Certified Developers",
-      type: "image",
-      image: alibabaImg,
-      issuer: "Alibaba Cloud",
-      year: "2024"
-    },
-    {
-      name: "Sertifikasi Kompetensi JavaScript Basic",
-      type: "image",
-      image: javascriptImg,
-      issuer: "Dicoding",
-      year: "2023"
-    },
-    {
-      name: "Data Engineering Professional Certification",
-      type: "image",
-      image: dataengImg,
-      issuer: "RapidMiner",
-      year: "2023"
-    },
-  ];
+  // Fetch certifications from Firestore
+  const { certifications: certs, loading } = useCertifications();
 
   return (
     <div className="min-h-screen">
@@ -139,7 +71,7 @@ export default function Certifications() {
                   <div className="relative h-56 bg-gray-100 dark:bg-gray-900 rounded-t-xl overflow-hidden flex flex-col items-center justify-center p-6">
                     <FaFilePdf className="text-6xl text-red-500 dark:text-red-400 mb-4" />
                     <a
-                      href={cert.pdfUrl}
+                      href={cert.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="framer-btn framer-btn-secondary text-sm flex items-center gap-2"
@@ -154,7 +86,7 @@ export default function Certifications() {
                 ) : (
                   <div className="relative h-56 bg-gray-100 dark:bg-gray-900 rounded-t-xl overflow-hidden flex items-center justify-center p-6">
                     <img
-                      src={cert.image}
+                      src={cert.fileUrl}
                       alt={cert.name}
                       className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                     />

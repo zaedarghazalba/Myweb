@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { User, FolderKanban, Rocket, BadgeCheck } from "lucide-react";
+import { User, FolderKanban, Rocket, BadgeCheck, Lock } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { useAuth } from "../context/AuthContext";
 
 export default function Layout({ children }) {
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   const navItems = [
     { to: "/", icon: User, label: "About" },
@@ -11,6 +13,11 @@ export default function Layout({ children }) {
     { to: "/projects", icon: Rocket, label: "Projects" },
     { to: "/certifications", icon: BadgeCheck, label: "Certifications" },
   ];
+
+  // Add Dashboard link if authenticated
+  if (isAuthenticated) {
+    navItems.push({ to: "/dashboard", icon: Lock, label: "Dashboard" });
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

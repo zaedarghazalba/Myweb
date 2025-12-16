@@ -2,6 +2,7 @@ import '../index.css';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt, FaRocket } from 'react-icons/fa';
 import SEO from '../Components/SEO';
+import { useProjects } from '../hooks/useProjects';
 
 export default function Projects() {
   const fadeIn = {
@@ -9,23 +10,8 @@ export default function Projects() {
     visible: { opacity: 1, y: 0 }
   };
 
-  const projects = [
-    {
-      id: 1,
-      name: 'Budget Planner',
-      description: 'A comprehensive budget planning application that helps users manage their finances, track expenses, and set financial goals. Built with modern web technologies for a smooth user experience.',
-      technologies: ['React', 'JavaScript', 'CSS', 'Vercel'],
-      liveUrl: 'https://budgetplanner-beta.vercel.app/',
-      screenshot: `https://api.screenshotone.com/take?url=https://budgetplanner-beta.vercel.app/&viewport_width=1200&viewport_height=800&device_scale_factor=1&image_quality=80&format=jpg&block_ads=true&block_cookie_banners=true&block_trackers=true&cache=true`,
-      category: 'Web Application',
-      features: [
-        'Track income and expenses',
-        'Budget planning tools',
-        'Financial goal setting',
-        'Responsive design'
-      ]
-    }
-  ];
+  // Fetch projects from Firestore
+  const { projects, loading } = useProjects();
 
   return (
     <div className="min-h-screen">
@@ -60,18 +46,27 @@ export default function Projects() {
       {/* Divider */}
       <div className="framer-divider"></div>
 
+      {/* Loading State */}
+      {loading && (
+        <div className="text-center py-24">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900 dark:border-white mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading projects...</p>
+        </div>
+      )}
+
       {/* Projects Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeIn}
-        transition={{ duration: 0.5 }}
-        className="py-24 md:py-32"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+      {!loading && (
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeIn}
+          transition={{ duration: 0.5 }}
+          className="py-24 md:py-32"
+        >
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -158,20 +153,21 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-12 text-center text-gray-600 dark:text-gray-400"
-          >
-            <p className="text-sm md:text-base">
-              Showing {projects.length} deployed {projects.length === 1 ? 'project' : 'projects'}
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 text-center text-gray-600 dark:text-gray-400"
+            >
+              <p className="text-sm md:text-base">
+                Showing {projects.length} deployed {projects.length === 1 ? 'project' : 'projects'}
+              </p>
+            </motion.div>
+          </div>
+        </motion.section>
+      )}
 
       {/* Footer - Minimal */}
       <footer className="text-center text-sm text-gray-400 dark:text-gray-600 py-12 border-t border-gray-200 dark:border-gray-800">

@@ -5,12 +5,16 @@ import githubService from '../services/githubService';
 import RepoCard from '../Components/RepoCard';
 import { FaFilter, FaPalette, FaCode, FaPaintBrush, FaVideo, FaCube, FaTimes, FaChevronLeft, FaChevronRight, FaInfoCircle, FaEyeSlash } from 'react-icons/fa';
 import SEO from '../Components/SEO';
+import { usePortfolios } from '../hooks/usePortfolios';
 
 export default function Portfolio() {
   const fadeIn = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 }
   };
+
+  // Fetch portfolios from Firestore
+  const { portfolios, loading: portfoliosLoading } = usePortfolios();
 
   const [portfolioType, setPortfolioType] = useState('design');
   const [designCategory, setDesignCategory] = useState('design-graphics');
@@ -22,101 +26,10 @@ export default function Portfolio() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showInfo, setShowInfo] = useState(true);
 
-  // Design Graphics Portfolio
-  const designGraphicsPortfolio = [
-    {
-      id: 1,
-      title: 'Design Graphics Project Beauty Theme',
-      category: 'Design Graphics',
-      description: 'Creative graphic design showcasing visual storytelling',
-      image: '/images/portfolio/design-graphics/1.png',
-      tags: ['Visual Design', 'Branding', 'Illustration']
-    },
-    {
-      id: 2,
-      title: 'Design Graphics Project Social Media Theme',
-      category: 'Design Graphics',
-      description: 'Modern graphic design with bold typography and colors',
-      image: '/images/portfolio/design-graphics/2.png',
-      tags: ['Typography', 'Color Theory', 'Layout Design']
-    },
-    {
-      id: 3,
-      title: 'Design Graphics Project Other Theme',
-      category: 'Design Graphics',
-      description: 'Innovative graphic design combining art and functionality',
-      image: '/images/portfolio/design-graphics/3.png',
-      tags: ['Digital Art', 'Visual Communication', 'Creative Design']
-    }
-  ];
-
-  const motionGraphicsPortfolio = [
-    {
-      id: 4,
-      title: 'Comming Soon Animation',
-      category: 'Motion Graphics',
-      description: 'Dynamic brand animation with smooth transitions',
-      image: '',
-      tags: ['Animation', 'Motion Design', 'Branding']
-    },
-    {
-      id: 5,
-      title: 'Comming Soon Animation UI',
-      category: 'Motion Graphics',
-      description: 'Interactive UI animations for better user experience',
-      image: '',
-      tags: ['UI Animation', 'Micro-interactions', 'UX']
-    },
-    {
-      id: 6,
-      title: 'Comming Soon Animation',
-      category: 'Motion Graphics',
-      description: 'Engaging explainer video with custom illustrations',
-      image: '',
-      tags: ['Video', 'Storytelling', 'Animation']
-    }
-  ];
-
-  const graphicsPortfolio3D = [
-    {
-      id: 7,
-      title: 'Comming Soon Animation',
-      category: '3D Graphics',
-      description: 'Photorealistic 3D product visualization',
-      image: '',
-      tags: ['3D Modeling', 'Rendering', 'Product Visualization']
-    },
-    {
-      id: 8,
-      title: 'Comming Soon Animation',
-      category: '3D Graphics',
-      description: 'Creative 3D character modeling and texturing',
-      image: '',
-      tags: ['Character Design', '3D Art', 'Modeling']
-    },
-    {
-      id: 9,
-      title: 'Comming Soon Animation',
-      category: '3D Graphics',
-      description: 'Realistic 3D architectural renders and walkthroughs',
-      image: '',
-      tags: ['Architecture', 'Visualization', '3D Rendering']
-    }
-  ];
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Get current portfolio filtered by category from Firestore
   const getCurrentPortfolio = useCallback(() => {
-    switch(designCategory) {
-      case 'design-graphics':
-        return designGraphicsPortfolio;
-      case 'motion-graphics':
-        return motionGraphicsPortfolio;
-      case '3d-graphics':
-        return graphicsPortfolio3D;
-      default:
-        return designGraphicsPortfolio;
-    }
-  }, [designCategory]);
+    return portfolios.filter(p => p.category === designCategory);
+  }, [portfolios, designCategory]);
 
   const openLightbox = (index) => {
     setCurrentImageIndex(index);
@@ -307,7 +220,7 @@ export default function Portfolio() {
                   {/* Image */}
                   <div className="relative overflow-hidden h-64 rounded-t-xl bg-gray-100 dark:bg-gray-900">
                     <img
-                      src={item.image}
+                      src={item.imageUrl}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
@@ -531,7 +444,7 @@ export default function Portfolio() {
             >
               <div className="relative">
                 <img
-                  src={getCurrentPortfolio()[currentImageIndex]?.image}
+                  src={getCurrentPortfolio()[currentImageIndex]?.imageUrl}
                   alt={getCurrentPortfolio()[currentImageIndex]?.title}
                   className={`max-w-[95vw] w-auto h-auto object-contain rounded-lg shadow-2xl transition-all duration-300 ${
                     showInfo ? 'max-h-[75vh]' : 'max-h-[90vh]'
