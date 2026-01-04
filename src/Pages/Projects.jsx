@@ -77,7 +77,23 @@ export default function Projects() {
               >
                 {/* Project Image */}
                 <div className="relative h-64 md:h-80 bg-gray-100 dark:bg-gray-900 overflow-hidden rounded-t-xl mb-6">
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  {project.screenshotUrl ? (
+                    <img
+                      src={project.screenshotUrl}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextElementSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+
+                  {/* Fallback Icon - shown if no screenshot or image fails to load */}
+                  <div
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ display: project.screenshotUrl ? 'none' : 'flex' }}
+                  >
                     <div className="text-center p-6">
                       <FaRocket className="text-5xl md:text-6xl mx-auto mb-4 text-gray-900 dark:text-white opacity-90" />
                       <p className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
