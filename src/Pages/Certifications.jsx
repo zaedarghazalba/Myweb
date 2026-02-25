@@ -145,7 +145,7 @@ export default function Certifications() {
             transition={{ delay: 0.5 }}
             className="mt-16 py-8 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between gap-6"
           >
-            <p className="text-gray-100 dark:text-gray-400 font-medium">
+            <p className="text-gray-600 dark:text-gray-400 font-medium">
               Total {certs.length} professional certifications obtained
             </p>
             <div className="flex gap-4">
