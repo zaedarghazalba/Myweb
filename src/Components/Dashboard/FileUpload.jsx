@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { FaUpload, FaImage, FaFilePdf, FaTimes } from 'react-icons/fa';
+import { FaUpload, FaImage, FaTimes } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 export default function FileUpload({
@@ -32,15 +32,8 @@ export default function FileUpload({
     }
 
     // Validate file type
-    const acceptTypes = accept.split(',').map(t => t.trim());
-    const isValidType = acceptTypes.some(type => {
-      if (type === 'image/*') return file.type.startsWith('image/');
-      if (type === 'application/pdf') return file.type === 'application/pdf';
-      return file.type === type;
-    });
-
-    if (!isValidType) {
-      toast.error('Tipe file tidak valid', {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Tipe file harus gambar (PNG, JPG, dll)', {
         duration: 3000,
         icon: '⚠️',
       });
@@ -88,7 +81,7 @@ export default function FileUpload({
           setPreview(downloadURL);
           setUploading(false);
           setProgress(0);
-          toast.success('File berhasil di-upload!', {
+          toast.success('Gambar berhasil di-upload!', {
             duration: 2500,
             icon: '✅',
           });
@@ -97,7 +90,8 @@ export default function FileUpload({
             onUploadComplete(downloadURL, response.public_id);
           }
         } else {
-          throw new Error('Upload failed');
+          const errBody = JSON.parse(xhr.responseText);
+          throw new Error(errBody?.error?.message || 'Upload failed');
         }
       });
 
@@ -111,8 +105,7 @@ export default function FileUpload({
         setProgress(0);
       });
 
-      // Send request
-      xhr.open('POST', `https://api.cloudinary.com/v1_1/${cloudName}/upload`);
+      xhr.open('POST', `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`);
       xhr.send(formData);
 
     } catch (error) {
@@ -136,48 +129,45 @@ export default function FileUpload({
     }
   };
 
-  const isPDF = preview && (preview.includes('.pdf') || preview.includes('application/pdf'));
-  const isImage = preview && !isPDF;
-
   return (
     <div className="space-y-4">
       {/* Upload Area */}
       {!preview && (
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-8 text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-600 transition-all"
+          className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-3xl p-12 text-center cursor-pointer hover:border-blue-500/50 hover:bg-blue-50/10 transition-all duration-300 group"
         >
           <input
             ref={fileInputRef}
             type="file"
-            accept={accept}
+            accept="image/*"
             onChange={handleFileSelect}
             className="hidden"
           />
 
-          <FaUpload className="mx-auto text-4xl text-gray-400 mb-4" />
+          <div className="bg-gray-100 dark:bg-gray-800 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+            <FaUpload className="text-2xl text-gray-400 group-hover:text-blue-500 transition-colors" />
+          </div>
 
           {uploading ? (
-            <div className="space-y-2">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="space-y-3">
+              <p className="text-sm font-bold text-gray-900 dark:text-white">
                 Uploading... {progress}%
               </p>
-              <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
+              <div className="w-48 mx-auto bg-gray-200 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden">
                 <div
-                  className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+                  className="bg-blue-500 h-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
             </div>
           ) : (
             <>
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-                Klik untuk upload file
+              <p className="text-base font-bold text-gray-900 dark:text-white mb-1">
+                Upload Certificate Image
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {accept === 'image/*' && `PNG, JPG (max. ${maxSizeMB}MB)`}
-                {accept === 'application/pdf' && `PDF (max. ${maxSizeMB}MB)`}
-                {accept === 'image/*,application/pdf' && `PNG, JPG, PDF (max. ${maxSizeMB}MB)`}
+                PNG, JPG, or WEBP (max. {maxSizeMB}MB)
               </p>
             </>
           )}
@@ -186,53 +176,34 @@ export default function FileUpload({
 
       {/* Preview */}
       {preview && (
-        <div className="relative framer-card p-4">
+        <div className="relative framer-card p-4 overflow-hidden group">
           <button
             onClick={handleRemove}
-            className="absolute top-2 right-2 p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+            className="absolute top-4 right-4 z-10 p-2 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white rounded-xl transition-all duration-300 backdrop-blur-sm"
           >
-            <FaTimes />
+            <FaTimes size={16} />
           </button>
 
-          {isImage && (
-            <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
+            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
               <img
                 src={preview}
                 alt="Preview"
-                className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
+                className="w-full h-full object-cover"
               />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <FaImage className="text-blue-500 flex-shrink-0" />
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
-                    Image uploaded
-                  </span>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 truncate w-full">
-                  {preview}
-                </p>
-              </div>
             </div>
-          )}
-
-          {isPDF && (
-            <div className="flex items-center gap-4">
-              <div className="w-24 h-24 bg-red-100 dark:bg-red-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <FaFilePdf className="text-4xl text-red-500" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <FaImage className="text-blue-500 flex-shrink-0" />
+                <span className="text-sm font-bold text-gray-900 dark:text-white">
+                  Certificate image uploaded
+                </span>
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <FaFilePdf className="text-red-500 flex-shrink-0" />
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
-                    PDF uploaded
-                  </span>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 truncate w-full break-all">
-                  {preview}
-                </p>
-              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 truncate w-full">
+                {preview.split('/').pop()}
+              </p>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>

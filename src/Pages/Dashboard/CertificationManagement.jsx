@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaPlus, FaEdit, FaTrash, FaTimes, FaCertificate, FaFilePdf, FaImage } from 'react-icons/fa';
+import { FaPlus, FaEdit, FaTrash, FaTimes, FaCertificate, FaFilePdf } from 'react-icons/fa';
 import { useCertifications } from '../../hooks/useCertifications';
 import CertificationForm from '../../Components/Dashboard/CertificationForm';
 
@@ -112,11 +112,10 @@ export default function CertificationManagement() {
               {/* Content */}
               <div className="p-4">
                 {/* Type Badge */}
-                <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-lg mb-2 ${
-                  cert.type === 'pdf'
+                <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-lg mb-2 ${cert.type === 'pdf'
                     ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
                     : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                }`}>
+                  }`}>
                   {cert.type.toUpperCase()}
                 </span>
 

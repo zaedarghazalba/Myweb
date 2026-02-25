@@ -1,11 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { User, FolderKanban, Rocket, BadgeCheck, Lock } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { useAuth } from "../context/AuthContext";
 
 export default function Layout({ children }) {
   const location = useLocation();
-  const { isAuthenticated } = useAuth();
 
   const navItems = [
     { to: "/", icon: User, label: "About" },

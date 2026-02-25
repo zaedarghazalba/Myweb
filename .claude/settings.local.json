@@ -20,7 +20,8 @@
       "Bash(npm uninstall:*)",
       "Bash(taskkill:*)",
       "Bash(git reset:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm test:*)"
     ],
     "deny": [],
     "ask": []

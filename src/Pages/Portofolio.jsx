@@ -14,7 +14,7 @@ export default function Portfolio() {
   };
 
   // Fetch portfolios from Firestore
-  const { portfolios, loading: portfoliosLoading } = usePortfolios();
+  const { portfolios } = usePortfolios();
 
   const [portfolioType, setPortfolioType] = useState('design');
   const [designCategory, setDesignCategory] = useState('design-graphics');
@@ -95,7 +95,7 @@ export default function Portfolio() {
 
   const filteredRepos = repos.filter(repo => {
     const matchesSearch = repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (repo.description && repo.description.toLowerCase().includes(searchTerm.toLowerCase()));
+      (repo.description && repo.description.toLowerCase().includes(searchTerm.toLowerCase()));
 
     if (filter === 'all') return matchesSearch;
     if (filter === 'starred') return matchesSearch && repo.stargazers_count > 0;
@@ -134,18 +134,16 @@ export default function Portfolio() {
           <div className="flex gap-4 justify-center">
             <button
               onClick={() => setPortfolioType('design')}
-              className={`framer-btn ${
-                portfolioType === 'design' ? 'framer-btn-primary' : 'framer-btn-secondary'
-              }`}
+              className={`framer-btn ${portfolioType === 'design' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                }`}
             >
               <FaPalette size={18} />
               Design Grafis
             </button>
             <button
               onClick={() => setPortfolioType('webdev')}
-              className={`framer-btn ${
-                portfolioType === 'webdev' ? 'framer-btn-primary' : 'framer-btn-secondary'
-              }`}
+              className={`framer-btn ${portfolioType === 'webdev' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                }`}
             >
               <FaCode size={18} />
               Web Developer
@@ -172,27 +170,24 @@ export default function Portfolio() {
             <div className="mb-12 flex gap-4 justify-center flex-wrap">
               <button
                 onClick={() => setDesignCategory('design-graphics')}
-                className={`framer-btn ${
-                  designCategory === 'design-graphics' ? 'framer-btn-primary' : 'framer-btn-secondary'
-                }`}
+                className={`framer-btn ${designCategory === 'design-graphics' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                  }`}
               >
                 <FaPaintBrush size={16} />
                 Design Graphics
               </button>
               <button
                 onClick={() => setDesignCategory('motion-graphics')}
-                className={`framer-btn ${
-                  designCategory === 'motion-graphics' ? 'framer-btn-primary' : 'framer-btn-secondary'
-                }`}
+                className={`framer-btn ${designCategory === 'motion-graphics' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                  }`}
               >
                 <FaVideo size={16} />
                 Motion Graphics
               </button>
               <button
                 onClick={() => setDesignCategory('3d-graphics')}
-                className={`framer-btn ${
-                  designCategory === '3d-graphics' ? 'framer-btn-primary' : 'framer-btn-secondary'
-                }`}
+                className={`framer-btn ${designCategory === '3d-graphics' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                  }`}
               >
                 <FaCube size={16} />
                 3D Graphics
@@ -287,17 +282,15 @@ export default function Portfolio() {
                 <FaFilter className="text-gray-500 flex-shrink-0" />
                 <button
                   onClick={() => setFilter('all')}
-                  className={`framer-btn framer-btn-sm ${
-                    filter === 'all' ? 'framer-btn-primary' : 'framer-btn-secondary'
-                  }`}
+                  className={`framer-btn framer-btn-sm ${filter === 'all' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                    }`}
                 >
                   All ({repos.length})
                 </button>
                 <button
                   onClick={() => setFilter('starred')}
-                  className={`framer-btn framer-btn-sm ${
-                    filter === 'starred' ? 'framer-btn-primary' : 'framer-btn-secondary'
-                  }`}
+                  className={`framer-btn framer-btn-sm ${filter === 'starred' ? 'framer-btn-primary' : 'framer-btn-secondary'
+                    }`}
                 >
                   Starred
                 </button>
@@ -305,9 +298,8 @@ export default function Portfolio() {
                   <button
                     key={lang}
                     onClick={() => setFilter(lang)}
-                    className={`framer-btn framer-btn-sm ${
-                      filter === lang ? 'framer-btn-primary' : 'framer-btn-secondary'
-                    }`}
+                    className={`framer-btn framer-btn-sm ${filter === lang ? 'framer-btn-primary' : 'framer-btn-secondary'
+                      }`}
                   >
                     {lang}
                   </button>
@@ -446,9 +438,8 @@ export default function Portfolio() {
                 <img
                   src={getCurrentPortfolio()[currentImageIndex]?.imageUrl}
                   alt={getCurrentPortfolio()[currentImageIndex]?.title}
-                  className={`max-w-[95vw] w-auto h-auto object-contain rounded-lg shadow-2xl transition-all duration-300 ${
-                    showInfo ? 'max-h-[75vh]' : 'max-h-[90vh]'
-                  }`}
+                  className={`max-w-[95vw] w-auto h-auto object-contain rounded-lg shadow-2xl transition-all duration-300 ${showInfo ? 'max-h-[75vh]' : 'max-h-[90vh]'
+                    }`}
                 />
               </div>
             </motion.div>

@@ -86,7 +86,7 @@ export default function About() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Zaedar Ghazalba - Portfolio"
+        title="Zaedar Ghazalba - Portfolio Website"
         description="Junior Programmer specializing in Web Development, Mobile Development, and QA Testing."
         keywords="Zaedar Ghazalba, Web Developer, Mobile Developer, QA Tester"
         type="profile"

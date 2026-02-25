@@ -6,7 +6,7 @@ import FileUpload from './FileUpload';
 
 const schema = yup.object({
   name: yup.string().required('Name wajib diisi'),
-  type: yup.string().required('Type wajib dipilih').oneOf(['pdf', 'image']),
+  type: yup.string().default('image'),
   issuer: yup.string().required('Issuer wajib diisi'),
   year: yup.string().required('Year wajib diisi').matches(/^\d{4}$/, 'Year harus 4 digit'),
   description: yup.string(),
@@ -15,39 +15,26 @@ const schema = yup.object({
 
 export default function CertificationForm({ onSubmit, onCancel, initialData = null, isSubmitting = false }) {
   const [fileUrl, setFileUrl] = useState(initialData?.fileUrl || '');
-  const [fileType, setFileType] = useState(initialData?.type || 'pdf');
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: initialData ? {
       name: initialData.name,
-      type: initialData.type,
+      type: 'image',
       issuer: initialData.issuer,
       year: initialData.year,
       description: initialData.description || '',
       fileUrl: initialData.fileUrl
     } : {
-      type: 'pdf',
+      type: 'image',
       year: new Date().getFullYear().toString()
     }
   });
-
-  const selectedType = watch('type');
-
-  useEffect(() => {
-    setFileType(selectedType);
-    // Clear file when type changes
-    if (selectedType !== fileType && !initialData) {
-      setFileUrl('');
-      setValue('fileUrl', '');
-    }
-  }, [selectedType, fileType, initialData, setValue]);
 
   useEffect(() => {
     setValue('fileUrl', fileUrl);
@@ -56,6 +43,7 @@ export default function CertificationForm({ onSubmit, onCancel, initialData = nu
   const handleFormSubmit = (data) => {
     const certificationData = {
       ...data,
+      type: 'image',
       fileUrl: fileUrl
     };
 
@@ -77,36 +65,6 @@ export default function CertificationForm({ onSubmit, onCancel, initialData = nu
         />
         {errors.name && (
           <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-        )}
-      </div>
-
-      {/* Type */}
-      <div>
-        <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
-          File Type <span className="text-red-500">*</span>
-        </label>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              {...register('type')}
-              type="radio"
-              value="pdf"
-              className="w-4 h-4"
-            />
-            <span className="text-gray-900 dark:text-white">PDF</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              {...register('type')}
-              type="radio"
-              value="image"
-              className="w-4 h-4"
-            />
-            <span className="text-gray-900 dark:text-white">Image</span>
-          </label>
-        </div>
-        {errors.type && (
-          <p className="mt-1 text-sm text-red-500">{errors.type.message}</p>
         )}
       </div>
 
@@ -162,12 +120,12 @@ export default function CertificationForm({ onSubmit, onCancel, initialData = nu
       {/* File Upload */}
       <div>
         <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
-          {fileType === 'pdf' ? 'PDF File' : 'Image'} <span className="text-red-500">*</span>
+          Certificate Image <span className="text-red-500">*</span>
         </label>
         <FileUpload
           onUploadComplete={(url) => setFileUrl(url)}
-          accept={fileType === 'pdf' ? 'application/pdf' : 'image/*'}
-          maxSizeMB={fileType === 'pdf' ? 10 : 5}
+          accept="image/*"
+          maxSizeMB={5}
           folder="certifications"
           currentFile={fileUrl}
         />

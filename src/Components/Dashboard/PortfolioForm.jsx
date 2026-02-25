@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import FileUpload from './FileUpload';
-import { FaTimes } from 'react-icons/fa';
 
 const schema = yup.object({
   title: yup.string().required('Title wajib diisi'),
