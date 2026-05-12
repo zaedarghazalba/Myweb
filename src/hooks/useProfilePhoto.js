@@ -49,43 +49,63 @@ export function useProfilePhoto() {
     }
 
     setUploading(true);
-    try {
+    
+    return new Promise((resolve) => {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', UPLOAD_PRESET);
-      formData.append('folder', 'uploads');
 
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-        { method: 'POST', body: formData }
-      );
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`);
 
-      if (!response.ok) {
-        throw new Error('Upload failed');
-      }
-
-      const data = await response.json();
-      const downloadURL = data.secure_url;
-
-      localStorage.setItem('profile_photo_url', downloadURL);
-      setProfilePhoto(downloadURL);
-
-      toast.success('Foto profil berhasil diperbarui!', {
-        duration: 2500,
-        icon: '✅',
+      xhr.upload.addEventListener('progress', (e) => {
+        if (e.lengthComputable) {
+          const percentComplete = Math.round((e.loaded / e.total) * 100);
+        }
       });
 
-      return { success: true, url: downloadURL };
-    } catch (err) {
-      console.error('Error uploading profile photo:', err);
-      toast.error('Gagal mengupload foto profil', {
-        duration: 3000,
-        icon: '❌',
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          const downloadURL = data.secure_url;
+
+          localStorage.setItem('profile_photo_url', downloadURL);
+          setProfilePhoto(downloadURL);
+
+          toast.success('Foto profil berhasil diperbarui!', {
+            duration: 2500,
+            icon: '✅',
+          });
+
+          resolve({ success: true, url: downloadURL });
+        } else {
+          let errorMsg = 'Upload failed';
+          try {
+            const errData = JSON.parse(xhr.responseText);
+            errorMsg = errData.error?.message || errorMsg;
+          } catch (e) {}
+          
+          console.error('Cloudinary error:', xhr.status, xhr.responseText);
+          toast.error('Gagal mengupload foto profil: ' + errorMsg, {
+            duration: 3000,
+            icon: '❌',
+          });
+          resolve({ success: false, error: errorMsg });
+        }
+        setUploading(false);
       });
-      return { success: false, error: err.message };
-    } finally {
-      setUploading(false);
-    }
+
+      xhr.addEventListener('error', () => {
+        toast.error('Gagal mengupload foto profil', {
+          duration: 3000,
+          icon: '❌',
+        });
+        setUploading(false);
+        resolve({ success: false, error: 'Network error' });
+      });
+
+      xhr.send(formData);
+    });
   };
 
   return {
