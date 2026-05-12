@@ -78,7 +78,11 @@ export default function Portfolio() {
     const fetchRepos = async () => {
       try {
         const reposData = await githubService.getUserRepos();
-        setRepos(reposData);
+        // Sort by updated date and take only 5 newest
+        const sortedRepos = reposData
+          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+          .slice(0, 5);
+        setRepos(sortedRepos);
       } catch (error) {
         console.error('Error fetching repositories:', error);
       } finally {
@@ -336,9 +340,17 @@ export default function Portfolio() {
             {/* Stats */}
             {!loading && repos.length > 0 && (
               <div className="mt-12 text-center text-gray-600 dark:text-gray-400">
-                <p>
-                  Showing {filteredRepos.length} of {repos.length} repositories
+                <p className="text-sm">
+                  Showing 5 newest repositories • Total: {repos.length} repos
                 </p>
+                <a 
+                  href="https://github.com/zaedarghazalba"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-500 hover:underline mt-2 inline-block"
+                >
+                  View all on GitHub →
+                </a>
               </div>
             )}
           </div>

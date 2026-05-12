@@ -123,13 +123,16 @@ export default function CertificationForm({ onSubmit, onCancel, initialData = nu
           Certificate Image <span className="text-red-500">*</span>
         </label>
         <FileUpload
-          onUploadComplete={(url) => setFileUrl(url)}
+          onUploadComplete={(url) => {
+            setFileUrl(url);
+            setValue('fileUrl', url, { shouldValidate: true });
+          }}
           accept="image/*"
           maxSizeMB={5}
           folder="certifications"
           currentFile={fileUrl}
         />
-        {errors.fileUrl && !fileUrl && (
+        {errors.fileUrl && (
           <p className="mt-1 text-sm text-red-500">{errors.fileUrl.message}</p>
         )}
       </div>

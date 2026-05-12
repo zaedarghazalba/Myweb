@@ -11,10 +11,10 @@ import { useLocation } from 'react-router-dom';
  * @param {string} props.type - Page type (website, article, profile)
  */
 const SEO = ({
-  title = "Zaedar Ghazalba - Junior Programmer & Web Developer",
-  description = "Portfolio Zaedar Ghazalba - Junior Programmer specializing in Web & Mobile Development, QA Testing, and Graphic Design. Experienced in React, Laravel, Kotlin, and Python.",
-  keywords = "Zaedar Ghazalba, Junior Programmer, Web Developer, Mobile Developer, QA Tester, Graphic Designer, React Developer, Laravel Developer, Portfolio Indonesia",
-  ogImage = `${window.location.origin}/logo512.png`,
+  title = "Zaedar Ghazalba - Junior Full-Stack Developer & Mobile Developer Portfolio",
+  description = "Zaedar Ghazalba adalah Junior Full-Stack Developer dan Mobile Developer Indonesia dengan pengalaman 2+ tahun. Spesialis React, Laravel, Kotlin, QA Testing, dan AI Tools. Portfolio showcasing scalable web & mobile applications.",
+  keywords = "Zaedar Ghazalba, Zaedar, Junior Full-Stack Developer Indonesia, Junior Mobile Developer Indonesia, Junior QA Engineer Indonesia, Junior Web Developer Yogyakarta, React Developer Indonesia, Laravel Developer, Portfolio Indonesia, Zaedar Ghazalba Portfolio, Akseleratech",
+  ogImage = `${window.location.origin}/og-image.jpg`,
   type = "website",
   author = "Zaedar Ghazalba"
 }) => {
@@ -103,32 +103,53 @@ const SEO = ({
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Zaedar Ghazalba",
+      "alternateName": "Zaedar",
       "url": window.location.origin,
       "image": ogImage,
       "sameAs": [
         "https://github.com/zaedarghazalba",
-        "https://www.linkedin.com/in/zaedar-ghazalba-908aa3275/",
-        "https://instagram.com/zeedargh"
+        "https://www.linkedin.com/in/zaedar-ghazalba",
+        "https://instagram.com/zeedargh",
+        "https://zaedarghazalba.vercel.app/about"
       ],
-      "jobTitle": "Junior Programmer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance"
-      },
-      "alumniOf": "Indonesia",
+      "jobTitle": "Full-Stack Developer | Mobile Developer | QA Engineer",
+      "worksFor": [
+        {
+          "@type": "Organization",
+          "name": "Akseleratech"
+        },
+        {
+          "@type": "Organization",
+          "name": "Freelance"
+        }
+      ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Yogyakarta University of Technology",
+          "sameAs": "https://uty.ac.id"
+        }
+      ],
       "email": "zaedaralba11202@gmail.com",
       "description": description,
       "knowsAbout": [
         "Web Development",
         "Mobile Development",
         "QA Testing",
-        "Graphic Design",
+        "AI Tools",
         "React",
         "Laravel",
         "Kotlin",
         "Python",
-        "JavaScript"
-      ]
+        "Firebase",
+        "WordPress",
+        "Tailwind CSS"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Indonesia"
+      },
+      "nationality": "Indonesian"
     };
 
     scriptTag.textContent = JSON.stringify(structuredData);

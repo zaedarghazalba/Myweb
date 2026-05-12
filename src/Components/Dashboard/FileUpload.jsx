@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
-import { FaUpload, FaImage, FaTimes } from 'react-icons/fa';
+import { FaUpload, FaImage, FaTimes, FaFilePdf } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 export default function FileUpload({
   onUploadComplete,
-  accept = 'image/*',
+  accept = 'image/*,application/pdf',
   maxSizeMB = 5,
   folder = 'uploads',
   currentFile = null
@@ -12,6 +12,7 @@ export default function FileUpload({
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [preview, setPreview] = useState(currentFile);
+  const [fileType, setFileType] = useState(currentFile ? (currentFile.includes('.pdf') || currentFile.includes('application/pdf') ? 'pdf' : 'image') : null);
   const fileInputRef = useRef(null);
 
   const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
@@ -32,8 +33,10 @@ export default function FileUpload({
     }
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      toast.error('Tipe file harus gambar (PNG, JPG, dll)', {
+    const validTypes = ['image/', 'application/pdf'];
+    const isValidType = validTypes.some(type => file.type.startsWith(type));
+    if (!isValidType) {
+      toast.error('Tipe file harus gambar (PNG, JPG, dll) atau PDF', {
         duration: 3000,
         icon: '⚠️',
       });
@@ -62,7 +65,19 @@ export default function FileUpload({
       formData.append('upload_preset', uploadPreset);
       formData.append('folder', folder);
 
+const isPdf = file.type === 'application/pdf';
+      
+      // For PDFs, use raw endpoint with access_mode=public
+      if (isPdf) {
+        formData.append('resource_type', 'raw');
+        formData.append('access_mode', 'public');
+      }
+
       const xhr = new XMLHttpRequest();
+
+      // Use correct endpoint
+      const endpoint = isPdf ? 'raw' : 'image';
+      xhr.open('POST', `https://api.cloudinary.com/v1_1/${cloudName}/${endpoint}/upload`);
 
       // Track upload progress
       xhr.upload.addEventListener('progress', (e) => {
@@ -77,11 +92,13 @@ export default function FileUpload({
         if (xhr.status === 200) {
           const response = JSON.parse(xhr.responseText);
           const downloadURL = response.secure_url;
+          const resourceType = response.resource_type;
 
           setPreview(downloadURL);
+          setFileType(resourceType === 'raw' ? 'pdf' : 'image');
           setUploading(false);
           setProgress(0);
-          toast.success('Gambar berhasil di-upload!', {
+          toast.success(resourceType === 'raw' ? 'PDF berhasil di-upload!' : 'Gambar berhasil di-upload!', {
             duration: 2500,
             icon: '✅',
           });
@@ -105,7 +122,6 @@ export default function FileUpload({
         setProgress(0);
       });
 
-      xhr.open('POST', `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`);
       xhr.send(formData);
 
     } catch (error) {
@@ -121,6 +137,7 @@ export default function FileUpload({
 
   const handleRemove = () => {
     setPreview(null);
+    setFileType(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -140,7 +157,7 @@ export default function FileUpload({
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/*"
+            accept="image/*,application/pdf"
             onChange={handleFileSelect}
             className="hidden"
           />
@@ -167,7 +184,7 @@ export default function FileUpload({
                 Upload Certificate Image
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                PNG, JPG, or WEBP (max. {maxSizeMB}MB)
+                PNG, JPG, PDF (max. {maxSizeMB}MB)
               </p>
             </>
           )}
@@ -185,18 +202,28 @@ export default function FileUpload({
           </button>
 
           <div className="flex items-center gap-6">
-            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
-              <img
-                src={preview}
-                alt="Preview"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {fileType === 'pdf' ? (
+              <div className="w-24 h-24 rounded-2xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                <FaFilePdf className="text-4xl text-red-500" />
+              </div>
+            ) : (
+              <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
+                <img
+                  src={preview}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <FaImage className="text-blue-500 flex-shrink-0" />
+                {fileType === 'pdf' ? (
+                  <FaFilePdf className="text-red-500 flex-shrink-0" />
+                ) : (
+                  <FaImage className="text-blue-500 flex-shrink-0" />
+                )}
                 <span className="text-sm font-bold text-gray-900 dark:text-white">
-                  Certificate image uploaded
+                  {fileType === 'pdf' ? 'PDF uploaded' : 'Image uploaded'}
                 </span>
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-400 truncate w-full">

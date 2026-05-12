@@ -1,41 +1,29 @@
 import '../index.css';
 import { motion } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
 import {
   FaInstagram, FaEnvelope, FaLinkedin, FaGithub,
   FaBug, FaMobileAlt, FaCode, FaPalette, FaMapMarkerAlt, FaDownload,
-  FaBriefcase, FaGraduationCap, FaCalendar, FaChevronDown
+  FaBriefcase, FaGraduationCap, FaCalendar, FaAward, FaRobot
 } from 'react-icons/fa';
 import SEO from '../Components/SEO';
 import TechStackInteractive from '../Components/TechStackInteractive';
+import GitHubContributions from '../Components/GitHubContributions';
+import { useProfilePhoto } from '../hooks/useProfilePhoto';
 
 export default function About() {
-  const [showCVDropdown, setShowCVDropdown] = useState(false);
-  const dropdownRef = useRef(null);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowCVDropdown(false);
-      }
-    }
-
-    if (showCVDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [showCVDropdown]);
+  const { profilePhoto, loading: photoLoading } = useProfilePhoto();
+  
   const fadeIn = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 }
   };
 
   const skills = [
-    { icon: FaBug, label: 'QA Testing', color: 'text-gray-900 dark:text-white' },
-    { icon: FaMobileAlt, label: 'Mobile Dev', color: 'text-gray-900 dark:text-white' },
-    { icon: FaCode, label: 'Web Dev', color: 'text-gray-900 dark:text-white' },
-    { icon: FaPalette, label: 'Design', color: 'text-gray-900 dark:text-white' },
+    { icon: FaBug, label: 'QA Testing', color: 'text-gray-600 dark:text-gray-400' },
+    { icon: FaMobileAlt, label: 'Mobile Dev', color: 'text-gray-600 dark:text-gray-400' },
+    { icon: FaCode, label: 'Web Dev', color: 'text-gray-600 dark:text-gray-400' },
+    { icon: FaPalette, label: 'Design', color: 'text-gray-600 dark:text-gray-400' },
+    { icon: FaRobot, label: 'AI Tools', color: 'text-gray-600 dark:text-gray-400' },
   ];
 
   const experiences = [
@@ -92,98 +80,126 @@ export default function About() {
         type="profile"
       />
 
-      {/* Hero Section - Framer Style: Large, Bold, Minimal */}
+      {/* Hero Section */}
       <motion.section
         initial="hidden"
         animate="visible"
         variants={fadeIn}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="py-24 md:py-32 lg:py-40"
+        className="relative min-h-screen flex"
       >
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Large Bold Heading - Framer Style */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight leading-none">
-            Zaedar Ghazalba
-          </h1>
+        {/* Left Side - Photo */}
+        <div className="hidden lg:block lg:absolute lg:left-0 lg:top-0 lg:w-1/2 lg:h-full z-0">
+          <div className="relative w-full h-full">
+            {photoLoading ? (
+              <div className="w-full h-full bg-gray-900"></div>
+            ) : profilePhoto ? (
+              <img 
+                src={profilePhoto} 
+                alt="Zaedar Ghazalba"
+                className="w-full h-full object-cover object-left"
+              />
+            ) : (
+              <img 
+                src="/profile-photo.jpg" 
+                alt="Zaedar Ghazalba"
+                className="w-full h-full object-cover object-left"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+            )}
+            {/* Cinematic Gradient Mask - blend to center */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(to right, transparent 0%, transparent 40%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.95) 90%, black 100%)'
+              }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+          </div>
+        </div>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-400 mb-8 font-light max-w-3xl mx-auto leading-relaxed">
-            Junior programmer yang antusias dalam dunia teknologi
-          </p>
+        {/* Right Side - Content */}
+        <div className="relative z-10 w-full lg:w-1/2 lg:ml-auto flex items-center">
+          <div className="w-full px-8 lg:px-16 py-16 lg:py-0">
+            {/* Name */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white tracking-tight leading-tight mb-4">
+              Zaedar Ghazalba
+            </h1>
 
-          {/* Description */}
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Berpengalaman dalam membangun aplikasi mobile dan web, dengan ketertarikan
-            besar dalam QA Testing dan design grafis.
-          </p>
+            {/* Professional Title */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full mb-6">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Open to Work</span>
+            </div>
 
-          {/* CTA Buttons - Clean & Minimal */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="mailto:zaedaralba11202@gmail.com"
-              className="framer-btn framer-btn-primary"
-            >
-              <FaEnvelope size={18} />
-              Contact Me
-            </a>
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-400 mb-6 font-light leading-relaxed">
+              Junior Full-Stack Developer | Mobile Developer | QA Engineer
+            </p>
 
-            {/* CV Download Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setShowCVDropdown(!showCVDropdown)}
-                className="framer-btn framer-btn-secondary flex items-center gap-2"
+            {/* Summary */}
+            <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+              <span className="font-semibold text-gray-900 dark:text-white">2+ years</span> of experience building 
+              <span className="font-semibold text-gray-900 dark:text-white"> scalable web & mobile applications</span>. 
+              Passionate about <span className="font-semibold text-gray-900 dark:text-white">delivering quality software</span> through 
+              clean code, comprehensive testing, and user-centric design.
+            </p>
+
+            {/* Key Metrics */}
+            <div className="grid grid-cols-3 gap-4 mb-10 max-w-sm">
+              <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">2+</div>
+                <div className="text-xs md:text-sm text-gray-500 dark:text-gray-500">Years Exp</div>
+              </div>
+              <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">10+</div>
+                <div className="text-xs md:text-sm text-gray-500 dark:text-gray-500">Projects</div>
+              </div>
+              <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">5+</div>
+                <div className="text-xs md:text-sm text-gray-500 dark:text-gray-500">Certifications</div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="mailto:zaedaralba11202@gmail.com"
+                className="framer-btn framer-btn-primary"
+              >
+                <FaEnvelope size={18} />
+                Contact Me
+              </a>
+              <a
+                href="/cv-programmer.pdf"
+                download="Zaedar-CV-Programmer.pdf"
+                className="framer-btn framer-btn-secondary"
               >
                 <FaDownload size={18} />
                 Download CV
-                <FaChevronDown
-                  size={14}
-                  className={`transition-transform duration-200 ${showCVDropdown ? 'rotate-180' : ''}`}
-                />
-              </button>
-
-              {showCVDropdown && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full mt-2 left-0 w-full min-w-[200px] bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg overflow-hidden z-10"
-                >
-                  <a
-                    href="/cv-programmer.pdf"
-                    download="Zaedar-CV-Programmer.pdf"
-                    className="block px-4 py-3 text-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
-                    onClick={() => setShowCVDropdown(false)}
-                  >
-                    <div className="flex items-center gap-2">
-                      <FaCode size={16} />
-                      <span className="font-medium">CV Programmer</span>
-                    </div>
-                  </a>
-                  <div className="border-t border-gray-200 dark:border-gray-800"></div>
-                  <a
-                    href="/cv-designer.pdf"
-                    download="Zaedar-CV-Designer.pdf"
-                    className="block px-4 py-3 text-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
-                    onClick={() => setShowCVDropdown(false)}
-                  >
-                    <div className="flex items-center gap-2">
-                      <FaPalette size={16} />
-                      <span className="font-medium">CV Designer</span>
-                    </div>
-                  </a>
-                </motion.div>
-              )}
+              </a>
+              <a
+                href="https://github.com/zaedarghazalba"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="framer-btn framer-btn-secondary"
+              >
+                <FaGithub size={18} />
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/zaedar-ghazalba"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="framer-btn framer-btn-secondary"
+              >
+                <FaLinkedin size={18} />
+                LinkedIn
+              </a>
             </div>
-
-            <a
-              href="https://github.com/zaedarghazalba"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="framer-btn framer-btn-secondary"
-            >
-              <FaGithub size={18} />
-              View GitHub
-            </a>
           </div>
         </div>
       </motion.section>
@@ -191,7 +207,7 @@ export default function About() {
       {/* Divider */}
       <div className="framer-divider"></div>
 
-      {/* Skills Section - Ultra Minimal */}
+      {/* Specializations Section */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -200,12 +216,12 @@ export default function About() {
         transition={{ duration: 0.5 }}
         className="py-24 md:py-32"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
             Specializations
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {skills.map((skill, index) => {
               const Icon = skill.icon;
               return (
@@ -231,7 +247,7 @@ export default function About() {
       {/* Divider */}
       <div className="framer-divider"></div>
 
-      {/* Tech Stack - Interactive */}
+      {/* Tech Stack Section */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -240,7 +256,7 @@ export default function About() {
         transition={{ duration: 0.5 }}
         className="py-24 md:py-32"
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
             Tech Stack
           </h2>
@@ -251,7 +267,7 @@ export default function About() {
       {/* Divider */}
       <div className="framer-divider"></div>
 
-      {/* Work Experience */}
+      {/* Work Experience Section */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -260,7 +276,7 @@ export default function About() {
         transition={{ duration: 0.5 }}
         className="py-24 md:py-32"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
             Work Experience
           </h2>
@@ -286,9 +302,9 @@ export default function About() {
                     <p className="text-base text-gray-600 dark:text-gray-400 mb-2">
                       {exp.company}
                     </p>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-3">
-                      <FaCalendar size={14} />
-                      <span>{exp.period}</span>
+                    <div className="flex items-center gap-2">
+                      <FaCalendar className="text-gray-400 dark:text-gray-500" size={12} />
+                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{exp.period}</span>
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 mb-3">
                       {exp.description}
@@ -312,7 +328,7 @@ export default function About() {
       {/* Divider */}
       <div className="framer-divider"></div>
 
-      {/* Education */}
+      {/* GitHub Contributions Section */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -321,7 +337,27 @@ export default function About() {
         transition={{ duration: 0.5 }}
         className="py-24 md:py-32"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+            GitHub Activity
+          </h2>
+          <GitHubContributions />
+        </div>
+      </motion.section>
+
+      {/* Divider */}
+      <div className="framer-divider"></div>
+
+      {/* Education Section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
             Education
           </h2>
@@ -347,9 +383,9 @@ export default function About() {
                     <p className="text-base text-gray-600 dark:text-gray-400 mb-2">
                       {edu.institution}
                     </p>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-3">
-                      <FaCalendar size={14} />
-                      <span>{edu.period}</span>
+                    <div className="flex items-center gap-2">
+                      <FaCalendar className="text-gray-400 dark:text-gray-500" size={12} />
+                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{edu.period}</span>
                     </div>
                     {edu.gpa && (
                       <div className="mb-3">
@@ -372,7 +408,7 @@ export default function About() {
       {/* Divider */}
       <div className="framer-divider"></div>
 
-      {/* Contact Section - Clean CTA */}
+      {/* Contact Section */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -433,7 +469,43 @@ export default function About() {
         </div>
       </motion.section>
 
-      {/* Footer - Minimal */}
+      {/* Call to Action Section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+        className="py-24 md:py-32"
+      >
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+            Interested in My Work?
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            Explore my projects and certifications to see what I've been working on.
+          </p>
+          
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a
+              href="/projects"
+              className="framer-btn framer-btn-primary"
+            >
+              <FaCode size={18} />
+              View Projects
+            </a>
+            <a
+              href="/certifications"
+              className="framer-btn framer-btn-secondary"
+            >
+              <FaAward size={18} />
+              View Certifications
+            </a>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Footer */}
       <footer className="text-center text-sm text-gray-400 dark:text-gray-600 py-12 border-t border-gray-200 dark:border-gray-800">
         <p>© {new Date().getFullYear()} Zaedar Ghazalba</p>
       </footer>

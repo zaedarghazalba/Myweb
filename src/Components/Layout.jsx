@@ -56,11 +56,9 @@ export default function Layout({ children }) {
         </div>
       </nav>
 
-      {/* Main Content - More Breathing Room */}
+      {/* Main Content */}
       <main className="flex-1 w-full overflow-x-hidden pt-16">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-8 py-8">
-          {children}
-        </div>
+        {children}
       </main>
 
       {/* Theme Toggle Button */}

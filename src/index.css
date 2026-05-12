@@ -8,11 +8,19 @@
    TYPOGRAPHY & BASE STYLES
    ================================== */
 
-/* Import modern font */
+/* Import modern fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #000;
+  --color-primary-hover: #333;
+  --color-accent: #666;
+  --color-accent-hover: #444;
 }
 
 html,
@@ -89,16 +97,16 @@ body {
    CUSTOM UTILITY CLASSES
    ================================== */
 
-/* Text gradient - subtle and elegant */
+/* Text gradient - original black/white */
 .text-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000 0%, #666 50%, #000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .dark .text-gradient {
-  background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+  background: linear-gradient(135deg, #fff 0%, #999 50%, #fff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -177,21 +185,21 @@ body {
 }
 
 .prose a {
-  color: #667eea;
+  color: #000;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .prose a:hover {
-  color: #764ba2;
+  color: #666;
 }
 
 .dark .prose a {
-  color: #a78bfa;
+  color: #fff;
 }
 
 .dark .prose a:hover {
-  color: #c4b5fd;
+  color: #ccc;
 }
 
 /* ===================================
@@ -231,13 +239,13 @@ body {
 
 /* Focus visible for keyboard navigation */
 *:focus-visible {
-  outline: 2px solid #667eea;
+  outline: 2px solid #000;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 .dark *:focus-visible {
-  outline-color: #a78bfa;
+  outline-color: #fff;
 }
 
 /* Skip to content link */
@@ -245,7 +253,7 @@ body {
   position: absolute;
   top: -40px;
   left: 0;
-  background: #667eea;
+  background: #000;
   color: white;
   padding: 8px 16px;
   text-decoration: none;

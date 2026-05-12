@@ -7,7 +7,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Framer-style minimal grayscale palette
         gray: {
           50: '#fafafa',
           100: '#f5f5f5',
@@ -23,6 +22,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'display-1': ['96px', { lineHeight: '1', letterSpacing: '-0.04em', fontWeight: '700' }],

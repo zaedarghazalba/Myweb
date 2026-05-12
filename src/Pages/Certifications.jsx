@@ -1,7 +1,7 @@
 import '../index.css';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaAward, FaTimes, FaExternalLinkAlt, FaCalendarAlt, FaBuilding, FaSearchPlus } from 'react-icons/fa';
+import { FaAward, FaTimes, FaExternalLinkAlt, FaCalendarAlt, FaBuilding, FaSearchPlus, FaFilePdf } from 'react-icons/fa';
 import SEO from '../Components/SEO';
 import { useCertifications } from '../hooks/useCertifications';
 
@@ -84,11 +84,26 @@ export default function Certifications() {
                 >
                   {/* Certificate Thumbnail */}
                   <div className="relative h-56 bg-gray-100 dark:bg-gray-800 overflow-hidden">
-                    <img
-                      src={cert.fileUrl}
-                      alt={cert.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                    {cert.fileUrl && (cert.fileUrl.includes('.pdf') || cert.fileUrl.includes('application/pdf') || cert.fileUrl.includes('raw') || cert.fileUrl.includes('/raw/')) ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-red-50 dark:bg-red-900/20">
+                        <FaFilePdf className="text-6xl text-red-500 mb-2" />
+                        <span className="text-sm text-red-600 dark:text-red-400 font-medium">PDF Certificate</span>
+                        <a 
+                          href={cert.fileUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                        >
+                          Click to view
+                        </a>
+                      </div>
+                    ) : (
+                      <img
+                        src={cert.fileUrl}
+                        alt={cert.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                       <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                         <div className="bg-white/90 dark:bg-gray-900/90 p-3 rounded-full shadow-lg">
@@ -191,20 +206,38 @@ export default function Certifications() {
 
               {/* Modal Image Section - Optimized for Mobile */}
               <div className="w-full md:w-[55%] lg:w-[60%] h-[35vh] sm:h-[45vh] md:h-auto bg-gray-50 dark:bg-gray-800/30 flex items-center justify-center relative group shrink-0">
-                <img
-                  src={selectedCert.fileUrl}
-                  alt={selectedCert.name}
-                  className="w-full h-full object-contain p-4 sm:p-6 md:p-10"
-                />
-                <a
-                  href={selectedCert.fileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-4 right-4 md:bottom-6 md:right-6 p-3 md:p-4 bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 text-xs md:text-sm font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transform md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-300 backdrop-blur-sm border border-gray-100 dark:border-gray-800"
-                >
-                  <FaExternalLinkAlt size={12} className="md:w-3.5 md:h-3.5" />
-                  <span>Full View</span>
-                </a>
+                {selectedCert.fileUrl && (selectedCert.fileUrl.includes('.pdf') || selectedCert.fileUrl.includes('application/pdf') || selectedCert.fileUrl.includes('raw') || selectedCert.fileUrl.includes('/raw/')) ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-8">
+                    <FaFilePdf className="text-8xl md:text-9xl text-red-500 mb-4" />
+                    <p className="text-gray-600 dark:text-gray-400 text-center mb-4">Certificate is a PDF document</p>
+                    <a
+                      href={selectedCert.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium flex items-center gap-2 transition-colors"
+                    >
+                      <FaExternalLinkAlt />
+                      Open PDF
+                    </a>
+                  </div>
+                ) : (
+                  <>
+                    <img
+                      src={selectedCert.fileUrl}
+                      alt={selectedCert.name}
+                      className="w-full h-full object-contain p-4 sm:p-6 md:p-10"
+                    />
+                    <a
+                      href={selectedCert.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-4 right-4 md:bottom-6 md:right-6 p-3 md:p-4 bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 text-xs md:text-sm font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transform md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-300 backdrop-blur-sm border border-gray-100 dark:border-gray-800"
+                    >
+                      <FaExternalLinkAlt size={12} className="md:w-3.5 md:h-3.5" />
+                      <span>Full View</span>
+                    </a>
+                  </>
+                )}
               </div>
 
               {/* Modal Info Section - Scrollable on small screens */}
