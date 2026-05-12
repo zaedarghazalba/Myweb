@@ -53,7 +53,7 @@ export function useProfilePhoto() {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', UPLOAD_PRESET);
-      formData.append('folder', 'profile');
+      formData.append('folder', 'uploads');
 
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
