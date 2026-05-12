@@ -61,7 +61,7 @@ export function useProfilePhoto() {
 
       xhr.upload.addEventListener('progress', (e) => {
         if (e.lengthComputable) {
-          const percentComplete = Math.round((e.loaded / e.total) * 100);
+          // Upload progress tracked
         }
       });
 
