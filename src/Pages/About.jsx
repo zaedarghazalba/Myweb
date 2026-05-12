@@ -8,11 +8,8 @@ import {
 import SEO from '../Components/SEO';
 import TechStackInteractive from '../Components/TechStackInteractive';
 import GitHubContributions from '../Components/GitHubContributions';
-import { useProfilePhoto } from '../hooks/useProfilePhoto';
 
 export default function About() {
-  const { profilePhoto, loading: photoLoading } = useProfilePhoto();
-  
   const fadeIn = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 }
@@ -91,25 +88,15 @@ export default function About() {
         {/* Left Side - Photo */}
         <div className="hidden lg:block lg:absolute lg:left-0 lg:top-0 lg:w-1/2 lg:h-full z-0">
           <div className="relative w-full h-full">
-            {photoLoading ? (
-              <div className="w-full h-full bg-gray-900"></div>
-            ) : profilePhoto ? (
-              <img 
-                src={profilePhoto} 
-                alt="Zaedar Ghazalba"
-                className="w-full h-full object-cover object-left"
-              />
-            ) : (
-              <img 
-                src="/profile-photo.jpg" 
-                alt="Zaedar Ghazalba"
-                className="w-full h-full object-cover object-left"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
-              />
-            )}
+            <img 
+              src="/profile-photo.jpg" 
+              alt="Zaedar Ghazalba"
+              className="w-full h-full object-cover object-left"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
             {/* Cinematic Gradient Mask - blend to center */}
             <div 
               className="absolute inset-0"

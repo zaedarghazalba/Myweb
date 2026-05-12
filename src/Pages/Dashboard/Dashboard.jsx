@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaFolderOpen, FaCertificate, FaRocket } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import ProfilePhotoSettings from '../../Components/Dashboard/ProfilePhotoSettings';
 
 export default function Dashboard() {
   const cards = [
@@ -39,9 +38,6 @@ export default function Dashboard() {
           Selamat datang! Kelola konten portfolio Anda dari sini.
         </p>
       </div>
-
-      {/* Profile Photo Settings */}
-      <ProfilePhotoSettings />
 
       {/* Quick Links */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
